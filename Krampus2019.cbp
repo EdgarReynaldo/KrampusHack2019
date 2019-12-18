@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Krampus2019" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="Krampus2019" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-static" />
+					<Add option="-lEagleA5DebugStatic" />
+					<Add option="-lEagleDebugStatic" />
+					<Add option="-lallegro_monolith-debug-static" />
+					<Add option="-ljpeg" />
+					<Add option="-ldumb" />
+					<Add option="-lwebp" />
+					<Add option="-lFLAC" />
+					<Add option="-ltheora" />
+					<Add option="-lvorbisfile" />
+					<Add option="-lvorbis" />
+					<Add option="-logg" />
+					<Add option="-lphysfs" />
+					<Add option="-lfreetype" />
+					<Add option="-lpng16" />
+					<Add option="-lzlibstatic" />
+					<Add option="-ldsound" />
+					<Add option="-lgdiplus" />
+					<Add option="-luuid" />
+					<Add option="-lkernel32" />
+					<Add option="-lwinmm" />
+					<Add option="-lpsapi" />
+					<Add option="-lopengl32" />
+					<Add option="-lglu32" />
+					<Add option="-luser32" />
+					<Add option="-lcomdlg32" />
+					<Add option="-lgdi32" />
+					<Add option="-lshell32" />
+					<Add option="-lole32" />
+					<Add option="-ladvapi32" />
+					<Add option="-lws2_32" />
+					<Add option="-lshlwapi" />
+					<Add option="-lpthread" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="Krampus2019" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-static" />
+					<Add option="-lEagleA5Static" />
+					<Add option="-lEagleStatic" />
+					<Add option="-lallegro_monolith-static" />
+					<Add option="-ljpeg" />
+					<Add option="-ldumb" />
+					<Add option="-lwebp" />
+					<Add option="-lFLAC" />
+					<Add option="-ltheora" />
+					<Add option="-lvorbisfile" />
+					<Add option="-lvorbis" />
+					<Add option="-logg" />
+					<Add option="-lphysfs" />
+					<Add option="-lfreetype" />
+					<Add option="-lpng16" />
+					<Add option="-lzlibstatic" />
+					<Add option="-ldsound" />
+					<Add option="-lgdiplus" />
+					<Add option="-luuid" />
+					<Add option="-lkernel32" />
+					<Add option="-lwinmm" />
+					<Add option="-lpsapi" />
+					<Add option="-lopengl32" />
+					<Add option="-lglu32" />
+					<Add option="-luser32" />
+					<Add option="-lcomdlg32" />
+					<Add option="-lgdi32" />
+					<Add option="-lshell32" />
+					<Add option="-lole32" />
+					<Add option="-ladvapi32" />
+					<Add option="-lws2_32" />
+					<Add option="-lshlwapi" />
+					<Add option="-lpthread" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/include" />
+			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525Trans/include" />
+		</Compiler>
+		<Linker>
+			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/cbbuild/lib" />
+			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/lib" />
+		</Linker>
+		<Unit filename="src/eagle/Transitions.cpp" />
+		<Unit filename="src/eagle/Transitions.hpp" />
+		<Unit filename="src/globals.cpp" />
+		<Unit filename="src/globals.hpp" />
+		<Unit filename="src/krampus/Entity.cpp" />
+		<Unit filename="src/krampus/Entity.hpp" />
+		<Unit filename="src/krampus/Game.cpp" />
+		<Unit filename="src/krampus/Game.hpp" />
+		<Unit filename="src/krampus/Menu.cpp" />
+		<Unit filename="src/krampus/Menu.hpp" />
+		<Unit filename="src/krampus/Scenes.cpp" />
+		<Unit filename="src/krampus/Scenes.hpp" />
+		<Unit filename="src/krampus/TextIconButton.cpp" />
+		<Unit filename="src/krampus/TextIconButton.hpp" />
+		<Unit filename="src/krampus_main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<fortran_project />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
