@@ -13,12 +13,14 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-DDEBUG" />
 				</Compiler>
 				<Linker>
 					<Add option="-static" />
 					<Add option="-lEagleA5DebugStatic" />
 					<Add option="-lEagleDebugStatic" />
 					<Add option="-lallegro_monolith-debug-static" />
+					<Add option="-lNilorea" />
 					<Add option="-ljpeg" />
 					<Add option="-ldumb" />
 					<Add option="-lwebp" />
@@ -65,6 +67,7 @@
 					<Add option="-lEagleA5Static" />
 					<Add option="-lEagleStatic" />
 					<Add option="-lallegro_monolith-static" />
+					<Add option="-lNilorea" />
 					<Add option="-ljpeg" />
 					<Add option="-ldumb" />
 					<Add option="-lwebp" />
@@ -104,10 +107,12 @@
 			<Add option="-Wall" />
 			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/include" />
 			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525Trans/include" />
+			<Add directory="Nilorea/include" />
 		</Compiler>
 		<Linker>
 			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/cbbuild/lib" />
 			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/lib" />
+			<Add directory="Nilorea/build" />
 		</Linker>
 		<Unit filename="src/eagle/Transitions.cpp" />
 		<Unit filename="src/eagle/Transitions.hpp" />
@@ -121,9 +126,9 @@
 		<Unit filename="src/krampus/Menu.hpp" />
 		<Unit filename="src/krampus/Scenes.cpp" />
 		<Unit filename="src/krampus/Scenes.hpp" />
-		<Unit filename="src/krampus/TextIconButton.cpp" />
-		<Unit filename="src/krampus/TextIconButton.hpp" />
 		<Unit filename="src/krampus_main.cpp" />
+		<Unit filename="src/networking/Server.cpp" />
+		<Unit filename="src/networking/Server.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -12,9 +12,17 @@
 
 #include "krampus/Scenes.hpp"
 #include "Globals.hpp"
+#include "krampus/Menu.hpp"
+#include "networking/Server.hpp"
+
 
 
 int main(int argc , char** argv) {
+
+   Server server;
+   return 1;
+
+
 
    (void)argc;
    (void)argv;
@@ -29,6 +37,9 @@ int main(int argc , char** argv) {
       /// return -1;
    }
 
+   atexit(Eagle::EagleLibrary::ShutdownEagle);
+   
+   
    win = dynamic_cast<Allegro5GraphicsContext*>(a5sys->CreateGraphicsContext("Krampus19" , scrw , scrh , EAGLE_WINDOWED | EAGLE_OPENGL));
    
    EAGLE_ASSERT(win && win->Valid());
@@ -62,6 +73,7 @@ int main(int argc , char** argv) {
 
    systimer->Start();
 
+//*1
    EagleInfo() << "Scene 1" << std::endl;
    Intro intro1(5.0 , 0 , 0 , scrw , scrh);
    intro1.Run();
@@ -74,8 +86,50 @@ int main(int argc , char** argv) {
    Intro3 intro3(5.0 , 0 , 0 , scrw , scrh);
    intro3.Run();
    
-   Eagle::EagleLibrary::ShutdownEagle();
-
+   EagleInfo() << "Menu scene" << std::endl;
+   MenuScene menu1(-1.0 , 0 , 0 , scrw , scrh);
+   menu1.Run();
+//   */
+   /**
+   TextIconButton btn(krampus_font_huge , "Press ME" , "TextIconButton" , "our button");
+   WidgetHandler gui(win);
+   gui.SetWidgetArea(Rectangle(0 , 0 , scrw , scrh) , false);
+   gui.SetupBuffer(scrw , scrh , win);
+   gui.AddWidget(&btn);
+   btn.SetWidgetArea(Rectangle(scrw/4 , scrh/4 , scrw/2 , scrh/2) , false);
+   EagleImage* btnimage = win->LoadImageFromFile("data/images/buttons/button.png");
+   btn.SetImages(btnimage , btnimage , btnimage , btnimage);
+   while (!quit) {
+      if (redraw) {
+         win->Clear();
+         gui.Display(win , 0 , 0);
+         win->FlipDisplay();
+         redraw = false;
+      }
+      do {
+         EagleEvent e;
+         e = a5sys->WaitForSystemEventAndUpdateState();
+         if (e.type == EAGLE_EVENT_TIMER) {redraw = true;}
+         if (e.type == EAGLE_EVENT_KEY_DOWN && e.keyboard.keycode == EAGLE_KEY_ESCAPE) {
+            quit = true;
+         }
+         if (e.type == EAGLE_EVENT_DISPLAY_CLOSE) {
+            quit = true;
+         }
+         int ret = gui.HandleEvent(e);
+         (void)ret;
+         if (gui.Flags().FlagOn(NEEDS_REDRAW)) {
+            redraw = true;
+         }
+         while (gui.HasMessages()) {
+            WidgetMsg msg = gui.TakeNextMessage();
+            EagleInfo() << msg << std::endl;
+         }
+      } while (!a5sys->UpToDate());
+   }
+*/
+   
+   
    return 0;
 }
 

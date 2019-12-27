@@ -30,6 +30,8 @@ public :
    virtual bool Setup()=0;
    virtual void Cleanup()=0;
    
+   virtual void SetPercent(double pct);
+   
    STATUS Run();
 };
 
@@ -86,6 +88,7 @@ public :
    virtual STATUS HandleEvent(EagleEvent e);
    virtual void Display();
    
+   virtual void SetPercent(double pct);
 };
 
 #endif // Scenes_HPP

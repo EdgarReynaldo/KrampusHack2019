@@ -6,6 +6,9 @@
 #define Entity_HPP
 
 
+#include "Eagle.hpp"
+
+
 
 class Entity {
    
@@ -14,14 +17,14 @@ protected :
    double vx,vy,vz;
    double w,h,d;
    
-   virtual void VHandleEvent(EagleEvent e)=0;
-   virtual void VUpdate(double dt)=0;
-   virtual void VDisplay(EagleGraphicsContext* win);
+   virtual void VHandleEvent(EagleEvent e) {}
+   virtual void VUpdate(double dt) {}
+   virtual void VDisplay(EagleGraphicsContext* win) {}
 public :
    
    Entity(double xpos , double ypos , double zpos , double width , double height , double depth);
    Entity(const Entity& e);
-
+   virtual ~Entity() {}
 
 
    void HandleEvent(EagleEvent e);

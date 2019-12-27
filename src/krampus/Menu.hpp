@@ -19,15 +19,16 @@ enum MENU_OPTION {
    NUM_MENU_OPTIONS = 5
 };
 
-const char* menu_strs[NUM_MENU_OPTIONS];
+extern const char* menu_strs[NUM_MENU_OPTIONS];
 
-const char* menu_keystrs[NUM_MENU_OPTIONS];
+extern const char* menu_keystrs[NUM_MENU_OPTIONS];
 
-int menu_keys[NUM_MENU_OPTIONS];
+extern const int menu_keys[NUM_MENU_OPTIONS];
 
 
 
 class Menu : public WidgetBase {
+
    
 protected :
    WidgetHandler gui;
@@ -48,7 +49,8 @@ protected :
    EagleImage* btnimage;
    EagleImage* kbtnimage;
    
-   
+   MENU_OPTION choice;
+   STATUS status;
    
    /// Private interface, override to define behavior
    virtual int PrivateHandleEvent(EagleEvent ee);///< Virtual function that controls how widgets react to events
@@ -65,28 +67,16 @@ protected :
    
    
    void SetupMenuLayouts();
-   void ClearMenuLayouts() {
+   void ClearMenuLayouts();
    
 public :
    Menu(std::string classname = "KrampusMenu" , std::string objname = "MainMenu");
-   Menu(std::string classname = "KrampusMenu" , std::string objname = "MainMenu") :
-         WidgetBase(classname , objname),
-         gui(win),
-         relative_layout(),
-         menu_layout(),
-         kmenu_layout(),
-         btns(),
-         kbtns(),
-         focus_btn(0),
-         option_selected(NUM_MENU_OPTIONS),
-         zscroll(0),
-         btnfont(0),
-         btnimage(0),
-         kbtnimage(0)
-   {}
          
    bool Setup();
    void Cleanup();
+   
+   STATUS GetStatus();
+   MENU_OPTION GetChoice();
 };
 
 
@@ -96,29 +86,20 @@ class MenuScene : public Scene {
 protected :
    Menu menu;
    
+   Intro3 bg_scene;
+
 public :
-   Menu(double length , int xpos , int ypos , int width , int height);
-   virtual ~Scene() {}
+   MenuScene(double length , int xpos , int ypos , int width , int height);
+   virtual ~MenuScene() {}
    
    virtual STATUS HandleEvent(EagleEvent e);
    virtual void Display();
    virtual bool Setup();
    virtual void Cleanup();
    
-   STATUS Run();
+
+   MENU_OPTION GetChoice();
 };
 
-STATUS MenuScene::HandleEvent(EagleEvent e) {
-   int ret = menu.HandleEvent(e);
-}
-void MenuScene::Display() {
-   return Menu.Display(win , 0 , 0);
-}
-bool MenuScene::Setup() {
-   return menu.Setup();
-}
-void MenuScene::Cleanup() {
-   menu.Cleanup();
-}
 
 #endif // Menu_HPP

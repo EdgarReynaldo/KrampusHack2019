@@ -27,9 +27,11 @@ STATUS Scene::Run() {
    }
    while (!quit && (status == STATUS_OKAY)) {
       if (redraw) {
+         win->Clear();
+            
          Transform t = win->GetTransformer()->GetViewTransform();
       
-         t.Scale(scrw/dest.W() , scrh/dest.H());
+//         t.Scale(scrw/dest.W() , scrh/dest.H());
          t.Translate(dest.X() , dest.Y());
          
          win->GetTransformer()->PushViewTransform(t);
@@ -58,6 +60,14 @@ STATUS Scene::Run() {
       return STATUS_QUIT;
    }
    return STATUS_COMPLETE;
+}
+
+
+
+void Scene::SetPercent(double pct) {
+   if (pct < 0.0) {pct = 0.0;}
+   if (pct > 1.0) {pct = 1.0;}
+   elapsed = pct*duration;
 }
 
 
@@ -243,10 +253,8 @@ void Intro3::Cleanup() {
 STATUS Intro3::HandleEvent(EagleEvent e) {
    if (e.type == EAGLE_EVENT_TIMER) {
       elapsed += inc;
+      if (elapsed > duration) {elapsed = duration;}
       pct = elapsed/duration;
-      if (pct > 1.0) {
-         pct = 1.0;
-      }
       tr_clip.Recalc(pct);
       redraw = true;
    }
@@ -287,3 +295,7 @@ void Intro3::Display() {
 
 
 
+void Intro3::SetPercent(double pct) {
+   Scene::SetPercent(pct);
+   tr_clip.Recalc(pct);
+}
