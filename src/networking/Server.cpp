@@ -48,38 +48,81 @@
 
 
 
-Server::Server() :
-      servnet(0),
+Server::Server(EagleSystem* esys) :
+      Network(esys),
+      NCONNECTIONS(0),
       ourIP(""),
-      ourPORT("888"),
+      ourPORT(""),
       SERVER_LISTENING(false),
-      SERVER_RUNNING(false)
-{
+      SERVER_RUNNING(false),
+      SERVER_THREADED(false)
+{}
+
+
+
+Server* Server::CreateServer(EagleSystem* esys , std::string PORT , unsigned int NUMCONNECTIONS) {
+   EAGLE_ASSERT(esys);
+   Server* server = new Server(esys);
+   server->thread = server->sys->CreateThread("ServerThread" , NetworkThread , server);
+   EAGLE_ASSERT(server->thread && server->thread->Valid());
+   
    /// int netw_make_listening( NETWORK **netw, char *addr, char *port, int nbpending, int ip_version );
 
-   SERVER_LISTENING = netw_make_listening(&servnet , NULL , (char*)ourPORT.c_str() , 12 , NETWORK_IPV4);
-   EagleInfo() << "Server is " << (SERVER_LISTENING?"listening":"not listening") << std::endl;
-   ourIP = GetLocalIP();
-   SERVER_RUNNING = netw_start_thr_engine(servnet);
-   EagleInfo() << "Server is " << (SERVER_RUNNING?"running":"not running") << std::endl;
+   server->SERVER_LISTENING = netw_make_listening(&server->net , NULL , &PORT[0] , NUMCONNECTIONS , NETWORK_IPV4);
+   EagleInfo() << "Server is " << (server->SERVER_LISTENING?"listening":"not listening") << std::endl;
+   if (server->SERVER_LISTENING) {
+      server->ourIP = GetLocalIP();
+      server->ourPORT = PORT;
+      server->NCONNECTIONS = NUMCONNECTIONS;
+   }
+   server->SERVER_RUNNING = netw_start_thr_engine(server->net);
+   EagleInfo() << "Server is " << (server->SERVER_RUNNING?"running":"not running") << std::endl;
+   if (server->SERVER_RUNNING) {
+      
+   }
+   server->thread->Start();
+   server->SERVER_THREADED = server->thread->Running();
+   EagleInfo() << "Server is " << (server->SERVER_THREADED?"threaded":"not threaded") << std::endl;
+   
+   if (!server->Ready()) {
+      delete server;
+      server = 0;
+   }
+   return server;
 }
 
 
 
 Server::~Server() {
-   if (servnet && SERVER_RUNNING) {
-      netw_stop_thr_engine(servnet);
+   Shutdown();
+};
+   
+   
+
+void Server::Shutdown() {
+   if (SERVER_THREADED) {
+      thread->SignalToStop();
+      thread->Join();
+      sys->FreeThread(thread);
+      thread = 0;
+      SERVER_THREADED = false;
+   }
+   if (net && SERVER_RUNNING) {
+      netw_stop_thr_engine(net);
       SERVER_RUNNING = false;
    }
-   if (servnet && SERVER_LISTENING) {
-      netw_close(&servnet);
-      servnet = 0;
+   if (net && SERVER_LISTENING) {
+      netw_close(&net);
+      net = 0;
       SERVER_LISTENING = false;
    }
 }
 
 
 
+bool Server::Ready() {
+   return SERVER_LISTENING && SERVER_RUNNING && SERVER_THREADED;
+}
 
 
 

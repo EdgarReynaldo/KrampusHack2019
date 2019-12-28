@@ -14,12 +14,23 @@ int main(int argc , char** argv) {
    (void)argc;
    (void)argv;
    
+   Allegro5System* a5sys = GetAllegro5System();
    
-   Server* master_server = new Server;
+   EAGLE_ASSERT(a5sys);
    
-   Client* client = new Client;
+   const int sysflags = EAGLE_SYSTEM;
+   if (!(sysflags & a5sys->Initialize(sysflags))) {
+      return -1;
+   }
    
-   EagleInfo() << "Connect was " << (client->Connect(master_server)?"successful":"not successful") << std::endl;
+   
+   Server* master_server = Server::CreateServer(a5sys , "888" , 12);
+   
+   Client* client = new Client(a5sys);
+   
+   bool success = client->Connect(master_server);
+
+   EagleInfo() << "Connect was " << (success?"successful":"not successful") << std::endl;
    
    delete client;
    

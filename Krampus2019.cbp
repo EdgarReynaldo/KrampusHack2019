@@ -127,6 +127,8 @@
 		<Unit filename="src/krampus/Scenes.cpp" />
 		<Unit filename="src/krampus/Scenes.hpp" />
 		<Unit filename="src/krampus_main.cpp" />
+		<Unit filename="src/networking/Client.cpp" />
+		<Unit filename="src/networking/Client.hpp" />
 		<Unit filename="src/networking/Server.cpp" />
 		<Unit filename="src/networking/Server.hpp" />
 		<Extensions>
