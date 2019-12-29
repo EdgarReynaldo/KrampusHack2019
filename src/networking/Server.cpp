@@ -75,7 +75,31 @@ Server* Server::CreateServer(EagleSystem* esys , std::string PORT , unsigned int
       server->ourPORT = PORT;
       server->NCONNECTIONS = NUMCONNECTIONS;
    }
-   server->SERVER_RUNNING = netw_start_thr_engine(server->net);
+   
+   /* CHANGES ARE GOING HERE */
+   while( !DONE )
+   {
+      NETWORK *client = NULL ;
+      /* get any accepted client on a network, non blocking way (-1) */
+      if ( ( client = netw_accept_from( &server->net , 0, 0, 0, 0, 0, -1, &error ) ) )
+      {
+         /* someone is connected, start mananing threads, network threads, whatever */
+         /*if( add_threaded_process( thread_pool, &manage_client, (void *)netw, DIRECT_PROC) == FALSE )
+         {
+            n_log( LOG_ERR, "Error adding client to thread pool" );
+         }*/ 
+      }
+      else
+      {
+         if( error != EAGAIN && error != EWOULDBLOCK )
+         {
+            n_log( LOG_ERR, "Error on accept for socket %d: %s" , strerror( errno ) );
+         }
+         u_sleep( 100000 ); /* give some time for other threads */
+      }
+   }    
+   
+   /* you'll have to adapt what's under, untouched */
    EagleInfo() << "Server is " << (server->SERVER_RUNNING?"running":"not running") << std::endl;
    if (server->SERVER_RUNNING) {
       
