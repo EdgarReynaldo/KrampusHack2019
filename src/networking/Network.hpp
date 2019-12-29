@@ -8,6 +8,7 @@
 #include "Eagle/Events.hpp"
 #include "Eagle/Exception.hpp"
 #include <string>
+#include "../eagle/BinStream.hpp"
 
 
 
@@ -35,6 +36,9 @@ public :
    std::string GetOurPORT() {return ourPORT;}
    
    virtual bool Ready() {return false;}
+   
+   bool SendPacket(const BinStream& bin);
+   bool SendPacket(const void* data , unsigned int SZ);
    
    friend void* NetworkThread(EagleThread* thread , void* data);
 };

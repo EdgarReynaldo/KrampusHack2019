@@ -26,7 +26,7 @@ void* NetworkThread(EagleThread* thread , void* data) {
          e.source = dynamic_cast<EagleEventSource*>(network);
          e.window = 0;
          e.timestamp = (double)ProgramTime::Elapsed();
-         e.network = new NETWORK_EVENT_DATA(net , net->link.ip , net->link.port , (unsigned char*)netstr->data , netstr->length);
+         e.network = new NETWORK_EVENT_DATA(network , net->link.ip , net->link.port , (unsigned char*)netstr->data , netstr->length);
          network->EmitEvent(e , thread);
          free_nstr(&netstr);
       }
@@ -62,5 +62,16 @@ Network::Network(EagleSystem* esys) :
 
 
 
+bool Network::SendPacket(const BinStream& bin) {
+   return SendPacket(bin.Data() , bin.Size());
+}
+
+
+
+bool Network::SendPacket(const void* data , unsigned int SZ) {
+   N_STR* nstr = 0;
+   char_to_nstr_ex((char*)data , SZ , &nstr);
+   return netw_add_msg(net , nstr);/// Not a memory leak, the network disposes of the nstr
+}
 
 

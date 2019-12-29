@@ -13,7 +13,7 @@ const bool little_endian = !big_endian;
 
 
 
-void BStream::PushData(const void* dat , unsigned int sz , bool reverse) {
+void BinStream::PushData(const void* dat , unsigned int sz , bool reverse) {
    EAGLE_ASSERT(sz);
    if (!sz) {return;}
 

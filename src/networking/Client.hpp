@@ -8,7 +8,6 @@
 #include <string>
 
 #include "Network.hpp"
-#include "NetworkThread.hpp"
 
 
 
@@ -29,6 +28,7 @@ public :
    bool Connect(const Server* serv);
    bool Connect(std::string IP , std::string PORT);
 
+   
    bool Ready() override;
 };
 
