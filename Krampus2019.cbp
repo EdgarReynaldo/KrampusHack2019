@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="Krampus2019" prefix_auto="1" extension_auto="1" />
+				<Option output="Krampus2019Debug" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -129,6 +129,8 @@
 		<Unit filename="src/krampus_main.cpp" />
 		<Unit filename="src/networking/Client.cpp" />
 		<Unit filename="src/networking/Client.hpp" />
+		<Unit filename="src/networking/Network.cpp" />
+		<Unit filename="src/networking/Network.hpp" />
 		<Unit filename="src/networking/Server.cpp" />
 		<Unit filename="src/networking/Server.hpp" />
 		<Extensions>

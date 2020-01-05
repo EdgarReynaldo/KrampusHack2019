@@ -22,29 +22,31 @@ class Network : public EagleEventSource {
 protected :
    NETWORK* net;
    EagleSystem* sys;
-   EagleThread* thread;
-   std::string ourIP;
-   std::string ourPORT;
+   EagleThread* recv_thread;
    
    
    Network(EagleSystem* esys);
 
 public :
    
+   virtual ~Network() {Close();}
+   
+   void Close();
+   
    NETWORK* GetNetwork() {return net;}
-   std::string GetOurIP() {return ourIP;}
-   std::string GetOurPORT() {return ourPORT;}
+   std::string GetOurIP();
+   std::string GetOurPORT();
    
    virtual bool Ready() {return false;}
    
    bool SendPacket(const BinStream& bin);
    bool SendPacket(const void* data , unsigned int SZ);
    
-   friend void* NetworkThread(EagleThread* thread , void* data);
+   friend void* ReceiverThread(EagleThread* thread , void* data);
 };
 
 
-void* NetworkThread(EagleThread* thread , void* data);
+void* ReceiverThread(EagleThread* thread , void* data);
 
 
 

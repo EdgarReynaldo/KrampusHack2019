@@ -7,7 +7,7 @@
 
 
 const unsigned int endian_value = ('B' << 24 | 'E' << 16 | 'E' << 8 | 'L');
-const bool big_endian = endian_value & 0x4245454C;
+const bool big_endian = endian_value == 0x4245454C;
 const bool little_endian = !big_endian;
 
 
@@ -28,6 +28,22 @@ void BinStream::PushData(const void* dat , unsigned int sz , bool reverse) {
    for (unsigned int i = 0 ; i < sz ; ++i) {
       bytes.push_back(*(rdat--));
    }
+}
+
+
+
+template <>
+BinStream& BinStream::operator<<(const char* str) {
+   this->PushData((const void*)str , strlen(str) + 1 , false);
+   return *this;
+}
+
+
+
+template <>
+BinStream& BinStream::operator<<(const std::string& str) {
+   (*this) << str.c_str();
+   return *this;
 }
 
 

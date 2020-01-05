@@ -7,7 +7,7 @@
 #include "Nilorea.h"
 
 
-void* NetworkThread(EagleThread* thread , void* data) {
+void* ReceiverThread(EagleThread* thread , void* data) {
    Network* network = (Network*)data;
    EAGLE_ASSERT(network && network->Ready());
    
@@ -42,6 +42,8 @@ void* NetworkThread(EagleThread* thread , void* data) {
       }
    }
    
+   EagleInfo() << "Network thread is exiting" << std::endl;
+   
    return (void*)thread;
 }
 
@@ -50,15 +52,40 @@ void* NetworkThread(EagleThread* thread , void* data) {
 Network::Network(EagleSystem* esys) :
       net(0),
       sys(esys),
-      thread(0),
-      ourIP(""),
-      ourPORT("")
+      recv_thread(0)
 {
    EAGLE_ASSERT(esys && esys->SystemUp());
    if (!esys || (esys && !esys->SystemUp())) {
       throw EagleException("Can't create Network without valid system pointer and system up!");
    }
 }
+
+
+
+void Network::Close() {
+   if (net) {
+      if (recv_thread) {
+         if (recv_thread->Running()) {
+            recv_thread->SignalToStop();
+            recv_thread->Join();
+         }
+         EAGLE_ASSERT(sys);
+         sys->FreeThread(recv_thread);
+         recv_thread = 0;
+      }
+      netw_stop_thr_engine(net);
+      netw_close(&net);
+      net = 0;
+   }
+}
+
+
+
+std::string Network::GetOurIP() {return (net?net->link.ip:"");}
+
+
+
+std::string Network::GetOurPORT() {return (net?net->link.port:"");}
 
 
 

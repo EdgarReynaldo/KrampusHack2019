@@ -14,6 +14,9 @@ int main(int argc , char** argv) {
    (void)argc;
    (void)argv;
    
+   set_log_file("NiloreaLog.txt");
+   set_log_level(LOG_DEBUG);
+   
    Allegro5System* a5sys = GetAllegro5System();
    
    EAGLE_ASSERT(a5sys);
@@ -24,13 +27,13 @@ int main(int argc , char** argv) {
    }
    
    
-   Server* master_server = Server::CreateServer(a5sys , "888" , 12);
+   Server* master_server = new Server(a5sys , "888" , 12);
    
    EagleEventHandler* q = a5sys->CreateEventHandler();
    
    Client* client = new Client(a5sys);
    
-   bool success = client->Connect(master_server);
+   bool success = client->Connect(GetLocalIP() , master_server->GetOurPORT());
 
    EagleInfo() << "Connect was " << (success?"successful":"not successful") << std::endl;
    
@@ -38,16 +41,29 @@ int main(int argc , char** argv) {
    q->ListenTo(client);
 
    BinStream bdat;
+   BinStream bdat2;
    bdat << StringPrintF("Testing message to server");
+   bdat2 << StringPrintF("Testing message to client");
    
-   client->SendPacket(bdat);
-
+   EAGLE_ASSERT(client->SendPacket(bdat));
+   EAGLE_ASSERT(master_server->SendPacket(bdat2));
+   
    do {
       EagleEvent e;
       q->WaitForEvent(MAIN_THREAD);
+      EagleInfo() << EagleEventName(e.type) << std::endl;
+      if (e.type == EAGLE_EVENT_DISPLAY_CLOSE) {
+         break;
+      }
+      if (e.type == EAGLE_EVENT_KEY_DOWN && e.keyboard.keycode == EAGLE_KEY_ESCAPE) {
+         break;
+      }
       if (e.type == EAGLE_EVENT_NETWORK_RECV_MSG) {
          if (e.network->srcNETWORK == master_server) {
             EagleInfo() << StringPrintF("Server received message :\n%s" , (const char*)e.network->data) << std::endl;
+         }
+         if (e.network->srcNETWORK == client) {
+            EagleInfo() << StringPrintF("Client received message :\n%s" , (const char*)e.network->data) << std::endl;
          }
       }
       if (IsNetworkEvent(e)) {

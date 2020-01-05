@@ -19,9 +19,6 @@
 
 int main(int argc , char** argv) {
 
-   Server server;
-   return 1;
-
 
 
    (void)argc;
