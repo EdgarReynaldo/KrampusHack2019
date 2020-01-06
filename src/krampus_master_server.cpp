@@ -37,6 +37,8 @@ int main(int argc , char** argv) {
 
    EagleInfo() << "Connect was " << (success?"successful":"not successful") << std::endl;
    
+   a5sys->Rest(2.0);
+   n_log(LOG_DEBUG , "Rested 2.0 seconds");
    q->ListenTo(master_server);
    q->ListenTo(client);
 

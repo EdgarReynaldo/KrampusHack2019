@@ -67,6 +67,7 @@ void* AcceptThread(EagleThread* thread , void* data) {
          if (client->Accept(1000 /* MS */ , server->GetNetwork())) {/// 250 MS timeout on accept
             server->clients.AddClient(client);
             client = new Client(server->System());
+            server->ListenTo(client);
          }
       }
       ThreadUnLockMutex(thread , server->mutex);
@@ -78,10 +79,10 @@ void* AcceptThread(EagleThread* thread , void* data) {
             EagleCritical() << "Network down!" << std::endl;
             return 0;
          }
-         if (ENGINE_STATE != NETW_THR_ENGINE_STARTED) {
-            EagleError() << "Network thread engine stopped!" << std::endl;
-            return 0;
-         }
+//         if (ENGINE_STATE != NETW_THR_ENGINE_STARTED) {
+//            EagleError() << "Network thread engine stopped!" << std::endl;
+//            return 0;
+//         }
       }
    }
    delete client;
@@ -183,7 +184,7 @@ Server::Server(EagleSystem* esys , std::string PORT , unsigned int NUMCONNECTION
    SERVER_LISTENING = netw_make_listening(&net , NULL , &PORT[0] , NUMCONNECTIONS , NETWORK_IPV4);
    EagleInfo() << "Server is " << (SERVER_LISTENING?"listening":"not listening") << std::endl;
    if (SERVER_LISTENING) {
-      SERVER_RUNNING = netw_start_thr_engine(net);
+      SERVER_RUNNING = true;///netw_start_thr_engine(net);
       EagleInfo() << "Server is " << (SERVER_RUNNING?"running":"not running") << std::endl;
       if (SERVER_RUNNING) {
          recv_thread->Start();
@@ -232,7 +233,7 @@ void Server::Shutdown() {
    ThreadUnLockMutex(0 , mutex);
 
    if (net && SERVER_RUNNING) {
-      netw_stop_thr_engine(net);
+///      netw_stop_thr_engine(net);
       SERVER_RUNNING = false;
    }
    if (net && SERVER_LISTENING) {
