@@ -6,7 +6,7 @@
 #include "Client.hpp"
 #include "Server.hpp"
 #include "Eagle.hpp"
-#include "Nilorea.h"
+#include "nilorea.h"
 
 
 

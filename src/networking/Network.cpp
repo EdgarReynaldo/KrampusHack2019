@@ -4,7 +4,7 @@
 #include "Eagle.hpp"
 #define CINTERFACE
 #include "Network.hpp"
-#include "Nilorea.h"
+#include "nilorea.h"
 
 
 void* ReceiverThread(EagleThread* thread , void* data) {
@@ -38,7 +38,7 @@ void* ReceiverThread(EagleThread* thread , void* data) {
             EagleWarn() << "Network asked us to exit or the thread engine stopped." << std::endl;
             break;
          }
-         Sleep(1);
+         sleep(1);
       }
    }
    

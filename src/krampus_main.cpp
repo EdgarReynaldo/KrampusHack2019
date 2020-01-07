@@ -11,7 +11,7 @@
 
 
 #include "krampus/Scenes.hpp"
-#include "Globals.hpp"
+#include "globals.hpp"
 #include "krampus/Menu.hpp"
 #include "networking/Server.hpp"
 

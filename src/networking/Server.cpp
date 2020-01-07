@@ -330,7 +330,7 @@ std::string GetLocalLinuxIP() {
     ifr.ifr_addr.sa_family = AF_INET;
      
     ///eth0 - define the ifr_name - port name where network attached
-    memcpy(ifr.ifr_name, "eth0", IFNAMSIZ-1);
+    memcpy(ifr.ifr_name, "enp0s3", IFNAMSIZ-1);
      
     /// Accessing network interface information by passing address using ioctl
     ioctl(fd, SIOCGIFADDR, &ifr);
@@ -338,7 +338,7 @@ std::string GetLocalLinuxIP() {
     close(fd);
      
     /// Extract IP Address
-    std::string ip_str = inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr));
+    std::string ip_str = inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr);
      
     EagleInfo() << StringPrintF("System IP Address is: %s\n",ip_str.c_str());
     

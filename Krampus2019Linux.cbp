@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Krampus2019Linux" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="Krampus2019Debug" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-lEagleA5DebugShared" />
+					<Add option="-lEagleDebugShared" />
+					<Add option="-lallegro_monolith-debug" />
+					<Add option="-lNilorea" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="Krampus2019" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lEagleA5Shared" />
+					<Add option="-lEagleShared" />
+					<Add option="-lallegro_monolith" />
+					<Add option="-lNilorea" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="/usr/local/Eagle/include" />
+			<Add directory="/usr/local/nilorea/include" />
+			<Add directory="/usr/local/allegro525/include" />
+		</Compiler>
+		<Linker>
+			<Add option="-lpthread" />
+			<Add directory="/usr/local/Eagle/lib" />
+			<Add directory="/usr/local/nilorea/lib" />
+			<Add directory="/usr/local/allegro525/lib" />
+		</Linker>
+		<Unit filename="src/eagle/Transitions.cpp" />
+		<Unit filename="src/eagle/Transitions.hpp" />
+		<Unit filename="src/globals.cpp" />
+		<Unit filename="src/globals.hpp" />
+		<Unit filename="src/krampus/Entity.cpp" />
+		<Unit filename="src/krampus/Entity.hpp" />
+		<Unit filename="src/krampus/Game.cpp" />
+		<Unit filename="src/krampus/Game.hpp" />
+		<Unit filename="src/krampus/Menu.cpp" />
+		<Unit filename="src/krampus/Menu.hpp" />
+		<Unit filename="src/krampus/Scenes.cpp" />
+		<Unit filename="src/krampus/Scenes.hpp" />
+		<Unit filename="src/krampus_main.cpp" />
+		<Unit filename="src/networking/Client.cpp" />
+		<Unit filename="src/networking/Client.hpp" />
+		<Unit filename="src/networking/Network.cpp" />
+		<Unit filename="src/networking/Network.hpp" />
+		<Unit filename="src/networking/Server.cpp" />
+		<Unit filename="src/networking/Server.hpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<fortran_project />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
