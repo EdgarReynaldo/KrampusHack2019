@@ -64,13 +64,18 @@ void* AcceptThread(EagleThread* thread , void* data) {
    while (!thread->ShouldStop()) {
       ThreadLockMutex(thread , server->mutex);
       if (server->NCONNECTIONS <= server->MAXNCONNECTIONS) {
+         ThreadUnLockMutex(thread , server->mutex);
          if (client->Accept(1000 /* MS */ , server->GetNetwork())) {/// 250 MS timeout on accept
+            ThreadLockMutex(thread , server->mutex);
             server->clients.AddClient(client);
             client = new Client(server->System());
             server->ListenTo(client);
+            ThreadUnLockMutex(thread , server->mutex);
          }
       }
-      ThreadUnLockMutex(thread , server->mutex);
+      else {
+         ThreadUnLockMutex(thread , server->mutex);
+      }
       int STATE = 0;
       int ENGINE_STATE = 0;
       if (netw_get_state(server->GetNetwork() , &STATE , &ENGINE_STATE)) {
