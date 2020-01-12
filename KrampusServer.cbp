@@ -114,6 +114,8 @@
 			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/lib" />
 			<Add directory="Nilorea/build" />
 		</Linker>
+		<Unit filename="EagleThreadLog.txt" />
+		<Unit filename="NiloreaLog.txt" />
 		<Unit filename="src/eagle/BinStream.cpp" />
 		<Unit filename="src/eagle/BinStream.hpp" />
 		<Unit filename="src/krampus_master_server.cpp" />
