@@ -18,6 +18,9 @@ class EagleSystem;
 class EagleThread;
 struct NETWORK;
 
+typedef unsigned int CLIENTID;
+extern const CLIENTID BADCLIENT;
+
 
 
 class Network : public EagleEventSource , public EagleObject {
@@ -27,8 +30,11 @@ protected :
    EagleThread* recv_thread;
    
    
-   Network(EagleSystem* esys);
+   Network(EagleSystem* esys , std::string classname = "Eagle Network" , std::string name = "Nemo");
 
+   
+   void ShutdownThread(EagleThread** thread);
+   
 public :
    
    
@@ -37,10 +43,8 @@ public :
    virtual void Close();
    
    NETWORK* GetNetwork() {return net;}
-   virtual std::string GetOurIP();
-   virtual std::string GetOurPORT();
-   virtual std::string GetDestIP();
-   virtual std::string GetDestPORT();
+   std::string GetOurIP();
+   std::string GetOurPORT();
    
    virtual bool Ready() {return false;}
    

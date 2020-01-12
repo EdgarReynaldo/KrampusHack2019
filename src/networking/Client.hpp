@@ -18,7 +18,13 @@ class Client : public Network {
    bool CLIENT_RUNNING;
    bool CLIENT_THREADED;
    
+   CLIENTID cid;
+   friend void* AcceptThread(EagleThread* thread , void* data);
+   
    friend class Server;
+   friend class ClientList;
+   
+   
    bool Adopt(NETWORK* newnet);
 
 public :
@@ -32,6 +38,9 @@ public :
    
    bool Accept(unsigned int timeout_msec , NETWORK* network);
    
+   std::string GetDestIP() {return destIP;}
+   std::string GetDestPORT() {return destPORT;}
+
    bool Ready() override;
 };
 

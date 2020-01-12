@@ -7,6 +7,12 @@
 #include "nilorea.h"
 #include "Server.hpp"
 
+
+
+const CLIENTID BADCLIENT = (unsigned int)-1;
+
+
+
 void* ReceiverThread(EagleThread* thread , void* data) {
    Network* network = (Network*)data;
    EAGLE_ASSERT(network && network->Ready());
@@ -57,7 +63,25 @@ void* ReceiverThread(EagleThread* thread , void* data) {
 
 
 
-Network::Network(EagleSystem* esys) :
+void Network::ShutdownThread(EagleThread** thread) {
+   if (!thread) {return;}
+   if (*thread) {
+      EagleThread* t = *thread;
+      if (t->Running()) {
+         t->SignalToStop();
+      }
+      t->Join();
+      EAGLE_ASSERT(sys);
+      sys->FreeThread(t);
+      *thread = 0;
+   }
+}
+
+
+
+Network::Network(EagleSystem* esys , std::string classname , std::string objname) :
+      EagleEventSource(),
+      EagleObject(classname , objname , true),
       net(0),
       sys(esys),
       recv_thread(0)
@@ -71,16 +95,8 @@ Network::Network(EagleSystem* esys) :
 
 
 void Network::Close() {
+   ShutdownThread(&recv_thread);
    if (net) {
-      if (recv_thread) {
-         if (recv_thread->Running()) {
-            recv_thread->SignalToStop();
-            recv_thread->Join();
-         }
-         EAGLE_ASSERT(sys);
-         sys->FreeThread(recv_thread);
-         recv_thread = 0;
-      }
       netw_stop_thr_engine(net);
       netw_close(&net);
       net = 0;

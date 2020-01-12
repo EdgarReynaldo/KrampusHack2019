@@ -7,6 +7,7 @@
 
 #define CINTERFACE
 #include "Eagle.hpp"
+#include "../eagle/BinStream.hpp"
 #include "nilorea.h"
 #include <string>
 
@@ -20,13 +21,22 @@ void* AcceptThread(EagleThread* thread , void* data);
 
 class Client;
 
+
+
+
 class ClientList {
+
+   static CLIENTID GetNewClientID() {
+      static CLIENTID cid = 0;
+      return cid++;
+   }
+
 public :
-   std::map<std::string , Client*> client_map;
+   std::map<CLIENTID , Client*> client_map;
    
    void AddClient(Client* client);
    void RemoveClient(Client* client);
-   Client* GetClient(std::string IP);
+   Client* GetClient(CLIENTID cid);
 
    unsigned int NumClients();
 };
@@ -38,7 +48,6 @@ class Server : public Network , public EagleEventListener {
    unsigned int NCONNECTIONS;
 
    bool SERVER_LISTENING;
-   bool SERVER_RUNNING;
    bool SERVER_THREADED;
    
    EagleMutex* mutex;
@@ -50,11 +59,10 @@ class Server : public Network , public EagleEventListener {
 private :
 //   Server(const Server& s); {}///< Copying a server is not allowed
    Server(const Server& s) :
-         Network(0),
+         Network(s.sys , "Bad server" , "Bad copy"),
          MAXNCONNECTIONS(0),
          NCONNECTIONS(0),
          SERVER_LISTENING(false),
-         SERVER_RUNNING(false),
          SERVER_THREADED(false),
          mutex(0),
          accept_thread(0),
@@ -69,6 +77,10 @@ private :
 protected :
    Server(EagleSystem* esys);
    
+   
+   bool BroadcastPacket(const BinStream& bin);
+   bool BroadcastPacket(const void* data , unsigned int SZ);
+
 public :
    Server(EagleSystem* sys , std::string PORT , unsigned int NCONNECTIONS);
    virtual ~Server();
@@ -76,8 +88,17 @@ public :
    void Shutdown();
    
    EagleSystem* System() {return sys;}
-
+   
    bool Ready() override;
+   
+   virtual bool SendPacket(const BinStream& bin);
+   virtual bool SendPacket(const void* data , unsigned int SZ);
+
+   bool SendPacket(CLIENTID cid , const BinStream& bin);
+   bool SendPacket(CLIENTID cid , const void* data , unsigned int SZ);
+
+   
+   unsigned int ClientCount() {return clients.NumClients();}
    
    friend void* AcceptThread(EagleThread* thread , void* data);
 };

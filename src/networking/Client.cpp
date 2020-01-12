@@ -14,7 +14,7 @@ bool Client::Adopt(NETWORK* newnet) {
    net = newnet;
    if (CLIENT_CONNECTED) {
       CLIENT_RUNNING = netw_start_thr_engine(net);
-      EagleInfo() << "Client is " << (CLIENT_RUNNING?"running.":"not running.") << std::endl;
+      EagleInfo() << "Client nilorea thread engine is " << (CLIENT_RUNNING?"running.":"not running.") << std::endl;
       if (CLIENT_RUNNING) {
          recv_thread = sys->CreateThread("ClientThread" , ReceiverThread , this);
          CLIENT_THREADED = recv_thread && recv_thread->Valid();
@@ -31,12 +31,13 @@ bool Client::Adopt(NETWORK* newnet) {
 
 
 Client::Client(EagleSystem* esys) :
-      Network(esys),
+      Network(esys , "Eagle Client" , "client"),
       destIP(""),
       destPORT(""),
       CLIENT_CONNECTED(false),
       CLIENT_RUNNING(false),
-      CLIENT_THREADED(false)
+      CLIENT_THREADED(false),
+      cid(BADCLIENT)
 {}
 
 
@@ -52,6 +53,7 @@ void Client::Disconnect() {
    CLIENT_THREADED = false;
    CLIENT_RUNNING = false;
    CLIENT_CONNECTED = false;
+   cid = BADCLIENT;
 }
 
 
@@ -90,6 +92,9 @@ bool Client::Accept(unsigned int timeout_msecs , NETWORK* network) {
       }
       return false;
    }
+   destIP = newnet->link.ip;
+   destPORT = newnet->link.port;
+   
    EagleInfo() << StringPrintF("Accepted client connection from %s" , newnet->link.ip) << std::endl;
    CLIENT_CONNECTED = true;
    

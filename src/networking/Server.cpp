@@ -68,9 +68,9 @@ void* AcceptThread(EagleThread* thread , void* data) {
          if (client->Accept(1000 /* MS */ , server->GetNetwork())) {/// 250 MS timeout on accept
             ThreadLockMutex(thread , server->mutex);
             server->clients.AddClient(client);
-            client = new Client(server->System());
             server->ListenTo(client);
             ThreadUnLockMutex(thread , server->mutex);
+            client = new Client(server->System());
          }
       }
       else {
@@ -106,11 +106,8 @@ void ClientList::AddClient(Client* client) {
    if (!client) {
       return;
    }
-   
-   std::map<std::string , Client*>::iterator it = client_map.find(client->GetNetwork()->link.ip);
-   if (it == client_map.end()) {
-      client_map[client->GetNetwork()->link.ip] = client;
-   }
+   client->cid = GetNewClientID();
+   client_map[client->cid] = client;
 }
 
 
@@ -121,7 +118,7 @@ void ClientList::RemoveClient(Client* client) {
       return;
    }
    
-   std::map<std::string , Client*>::iterator it = client_map.find(client->GetNetwork()->link.ip);
+   std::map<CLIENTID , Client*>::iterator it = client_map.find(client->cid);
    if (it != client_map.end()) {
       delete it->second;
       client_map.erase(it);
@@ -130,8 +127,8 @@ void ClientList::RemoveClient(Client* client) {
 
 
 
-Client* ClientList::GetClient(std::string IP) {
-   std::map<std::string , Client*>::iterator it = client_map.find(IP);
+Client* ClientList::GetClient(CLIENTID cid) {
+   std::map<CLIENTID , Client*>::iterator it = client_map.find(cid);
    if (it != client_map.end()) {
       return it->second;
    }
@@ -161,12 +158,29 @@ void Server::RespondToEvent(EagleEvent e , EagleThread* thread) {
 
 
 
+bool Server::BroadcastPacket(const BinStream& bin) {
+   return BroadcastPacket(bin.Data() , bin.Size());
+}
+
+
+
+bool Server::BroadcastPacket(const void* data , unsigned int SZ) {
+   std::map<CLIENTID , Client*>::iterator it = clients.client_map.begin();
+   bool success = true;
+   while (it != clients.client_map.end()) {
+      success = success && SendPacket(it->first , data , SZ);
+      ++it;
+   }
+   return success;
+}
+
+
+
 Server::Server(EagleSystem* esys , std::string PORT , unsigned int NUMCONNECTIONS) :
-      Network(esys),
+      Network(esys , "Eagle Server" , "Server network"),
       MAXNCONNECTIONS(NUMCONNECTIONS),
       NCONNECTIONS(0),
       SERVER_LISTENING(false),
-      SERVER_RUNNING(false),
       SERVER_THREADED(false),
       mutex(0),
       accept_thread(0),
@@ -176,28 +190,17 @@ Server::Server(EagleSystem* esys , std::string PORT , unsigned int NUMCONNECTION
    mutex = esys->CreateMutex("Server mutex" , false , false);
    EAGLE_ASSERT(mutex && mutex->Valid());
 
-//   recv_thread = sys->CreateThread("ServerThread" , ReceiverThread , this);
    accept_thread = sys->CreateThread("AcceptThread" , AcceptThread , this);
-   if (!(recv_thread && accept_thread && recv_thread->Valid() && accept_thread->Valid())) {
-   if (!(accept_thread && accept_thread->Valid()) {
-//      EAGLE_ASSERT(recv_thread && recv_thread->Valid());
+   if (!(accept_thread && accept_thread->Valid())) {
       EAGLE_ASSERT(accept_thread && accept_thread->Valid());
       return;
    }
    
-   /// int netw_make_listening( NETWORK **netw, char *addr, char *port, int nbpending, int ip_version );
-
    SERVER_LISTENING = netw_make_listening(&net , NULL , &PORT[0] , NUMCONNECTIONS , NETWORK_IPV4);
    EagleInfo() << "Server is " << (SERVER_LISTENING?"listening":"not listening") << std::endl;
    if (SERVER_LISTENING) {
-      SERVER_RUNNING = true;///netw_start_thr_engine(net);
-      EagleInfo() << "Server is " << (SERVER_RUNNING?"running":"not running") << std::endl;
-      if (SERVER_RUNNING) {
-         recv_thread->Start();
-         accept_thread->Start();
-         SERVER_THREADED = recv_thread->Running() && accept_thread->Running();
-         EagleInfo() << "Server is " << (SERVER_THREADED?"threaded":"not threaded") << std::endl;
-      }
+      accept_thread->Start();
+      SERVER_THREADED = accept_thread->Running();
    }
 }
 
@@ -208,6 +211,7 @@ Server::~Server() {
    if (mutex) {
       if (sys) {
          sys->FreeMutex(mutex);
+         mutex = 0;
       }
    }
 };
@@ -216,48 +220,54 @@ Server::~Server() {
 
 void Server::Shutdown() {
    
-   if (accept_thread) {
-      accept_thread->SignalToStop();
-      accept_thread->Join();
-      sys->FreeThread(accept_thread);
-      accept_thread = 0;
-   }
+   ShutdownThread(&accept_thread);
    
-   if (SERVER_THREADED) {
-      recv_thread->SignalToStop();
-      recv_thread->Join();
-      sys->FreeThread(recv_thread);
-      recv_thread = 0;
-      SERVER_THREADED = false;
-   }
    ThreadLockMutex(0 , mutex);
-   std::map<std::string , Client*>::iterator it = clients.client_map.begin();
+   std::map<CLIENTID , Client*>::iterator it = clients.client_map.begin();
    while (it != clients.client_map.end()) {
       delete it->second;
+      ++it;
    }
    clients.client_map.clear();
    ThreadUnLockMutex(0 , mutex);
 
-   if (net && SERVER_RUNNING) {
-///      netw_stop_thr_engine(net);
-      SERVER_RUNNING = false;
-   }
-   if (net && SERVER_LISTENING) {
+   if (net) {
+      SERVER_LISTENING = false;
       netw_close(&net);
       net = 0;
-      SERVER_LISTENING = false;
    }
 }
+
 
 
 
 bool Server::Ready() {
-   return SERVER_LISTENING && SERVER_RUNNING && SERVER_THREADED;
+   return SERVER_LISTENING && SERVER_THREADED;
 }
 
 
 
+bool Server::SendPacket(const BinStream& bin) {
+   return BroadcastPacket(bin);
+}
 
+
+
+bool Server::SendPacket(const void* data , unsigned int SZ) {
+   return BroadcastPacket(data , SZ);
+}
+
+
+
+bool Server::SendPacket(CLIENTID cid , const BinStream& bin) {
+   return clients.client_map[cid]->SendPacket(bin);
+}
+
+
+
+bool Server::SendPacket(CLIENTID cid , const void* data , unsigned int SZ) {
+   return clients.client_map[cid]->SendPacket(data,SZ);
+}
 
 
 
