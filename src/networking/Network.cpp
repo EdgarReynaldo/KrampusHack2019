@@ -5,7 +5,7 @@
 #define CINTERFACE
 #include "Network.hpp"
 #include "nilorea.h"
-
+#include "Server.hpp"
 
 void* ReceiverThread(EagleThread* thread , void* data) {
    Network* network = (Network*)data;
@@ -26,7 +26,7 @@ void* ReceiverThread(EagleThread* thread , void* data) {
          e.source = dynamic_cast<EagleEventSource*>(network);
          e.window = 0;
          e.timestamp = (double)ProgramTime::Elapsed();
-         e.network = new NETWORK_EVENT_DATA(network , net->link.ip , net->link.port , (unsigned char*)netstr->data , netstr->length);
+         e.network = new NETWORK_EVENT_DATA(network , net->link.ip?net->link.ip:"" , net->link.port?net->link.port:"" , (unsigned char*)netstr->data , netstr->length);
          network->EmitEvent(e , thread);
          free_nstr(&netstr);
       }
@@ -34,9 +34,17 @@ void* ReceiverThread(EagleThread* thread , void* data) {
          int STATE = 0;
          int ENGINE_STATE = 0;
          netw_get_state(net , &STATE , &ENGINE_STATE);
-         if (STATE == NETW_EXIT_ASKED || ENGINE_STATE == NETW_THR_ENGINE_STOPPED) {
-            EagleWarn() << "Network asked us to exit or the thread engine stopped." << std::endl;
+         EagleInfo() << StringPrintF("ReceiverThread %p says network state is %d , %d" , thread , STATE , ENGINE_STATE) << std::endl;
+         if (STATE == NETW_EXIT_ASKED) {
+            EagleWarn() << "Network asked us to exit" << std::endl;
             break;
+         }
+         if (ENGINE_STATE == NETW_THR_ENGINE_STOPPED) {
+            Server* server = dynamic_cast<Server*>(network);
+            if (!server) {
+               EagleWarn() << "Network thread engine stopped on a client thread" << std::endl;
+               break;
+            }
          }
          sleep(1);
       }

@@ -17,6 +17,8 @@ int main(int argc , char** argv) {
    set_log_file("NiloreaLog.txt");
    set_log_level(LOG_DEBUG);
    
+   SendOutputToFile("EagleLog.txt" , "KRAMPUS SERVER\n" , false);
+   
    Allegro5System* a5sys = GetAllegro5System();
    
    EAGLE_ASSERT(a5sys);
@@ -27,16 +29,19 @@ int main(int argc , char** argv) {
    }
    
    
-   Server* master_server = new Server(a5sys , "888" , 12);
+   Server* master_server = new Server(a5sys , "8888" , 12);
    
    EagleEventHandler* q = a5sys->CreateEventHandler();
    
    Client* client = new Client(a5sys);
    
-   bool success = client->Connect(GetLocalIP() , master_server->GetOurPORT());
+   bool success = client->Connect("10.0.2.15" , master_server->GetOurPORT());
+//   bool success = client->Connect(GetLocalIP() , master_server->GetOurPORT());
 
    EagleInfo() << "Connect was " << (success?"successful":"not successful") << std::endl;
    
+
+      
    a5sys->Rest(2.0);
    n_log(LOG_DEBUG , "Rested 2.0 seconds");
    q->ListenTo(master_server);

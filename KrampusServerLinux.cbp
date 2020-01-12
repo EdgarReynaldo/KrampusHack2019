@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Krampus2019Linux" />
+		<Option title="KrampusServerLinux" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="Krampus2019Debug" prefix_auto="1" extension_auto="1" />
+				<Option output="KrampusServerDebug" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -23,7 +23,7 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="Krampus2019" prefix_auto="1" extension_auto="1" />
+				<Option output="KrampusServer" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -51,19 +51,10 @@
 			<Add directory="/usr/local/nilorea/lib" />
 			<Add directory="/usr/local/allegro525/lib" />
 		</Linker>
-		<Unit filename="src/eagle/Transitions.cpp" />
-		<Unit filename="src/eagle/Transitions.hpp" />
-		<Unit filename="src/globals.cpp" />
-		<Unit filename="src/globals.hpp" />
-		<Unit filename="src/krampus/Entity.cpp" />
-		<Unit filename="src/krampus/Entity.hpp" />
-		<Unit filename="src/krampus/Game.cpp" />
-		<Unit filename="src/krampus/Game.hpp" />
-		<Unit filename="src/krampus/Menu.cpp" />
-		<Unit filename="src/krampus/Menu.hpp" />
-		<Unit filename="src/krampus/Scenes.cpp" />
-		<Unit filename="src/krampus/Scenes.hpp" />
-		<Unit filename="src/krampus_main.cpp" />
+		<Unit filename="NiloreaLog.txt" />
+		<Unit filename="src/eagle/BinStream.cpp" />
+		<Unit filename="src/eagle/BinStream.hpp" />
+		<Unit filename="src/krampus_master_server.cpp" />
 		<Unit filename="src/networking/Client.cpp" />
 		<Unit filename="src/networking/Client.hpp" />
 		<Unit filename="src/networking/Network.cpp" />
