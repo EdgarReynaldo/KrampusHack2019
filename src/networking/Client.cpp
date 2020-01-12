@@ -64,7 +64,7 @@ bool Client::Connect(std::string IP , std::string PORT) {
 ///int netw_connect_ex( &(*netw), host, port, 0, 0, 0, 0, 0, ip_version );
 
    NETWORK* newnet = 0;
-   CLIENT_CONNECTED = netw_connect_ex(&newnet , &IP[0] , &PORT[0] , 0 , 1 , 1 , 1 , 1 , NETWORK_IPV4);
+   CLIENT_CONNECTED = netw_connect_ex(&newnet , &IP[0] , &PORT[0] , 0 , 0 , 0 , 0 , 0 , NETWORK_IPV4);
    if (!CLIENT_CONNECTED) {
       EagleInfo() << "Client failed to connect." << std::endl;
       return false;
