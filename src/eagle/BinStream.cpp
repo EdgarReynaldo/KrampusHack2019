@@ -17,16 +17,16 @@ void BinStream::PushData(const void* dat , unsigned int sz , bool reverse) {
    EAGLE_ASSERT(sz);
    if (!sz) {return;}
 
-
-   bytes.reserve(bytes.size() + sz);
+   const unsigned int end = bytes.size();
+   bytes.resize(bytes.size() + sz);
    if (!reverse) {
-      memcpy(&bytes[bytes.size()] , dat , sz);
+      memcpy(&bytes[end] , dat , sz);
       return;
    }
 
    unsigned char* rdat = (unsigned char*)dat + ((int)sz - 1);
    for (unsigned int i = 0 ; i < sz ; ++i) {
-      bytes.push_back(*(rdat--));
+      bytes[end + i] = *(rdat--);
    }
 }
 

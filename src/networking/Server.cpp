@@ -176,10 +176,11 @@ Server::Server(EagleSystem* esys , std::string PORT , unsigned int NUMCONNECTION
    mutex = esys->CreateMutex("Server mutex" , false , false);
    EAGLE_ASSERT(mutex && mutex->Valid());
 
-   recv_thread = sys->CreateThread("ServerThread" , ReceiverThread , this);
+//   recv_thread = sys->CreateThread("ServerThread" , ReceiverThread , this);
    accept_thread = sys->CreateThread("AcceptThread" , AcceptThread , this);
    if (!(recv_thread && accept_thread && recv_thread->Valid() && accept_thread->Valid())) {
-      EAGLE_ASSERT(recv_thread && recv_thread->Valid());
+   if (!(accept_thread && accept_thread->Valid()) {
+//      EAGLE_ASSERT(recv_thread && recv_thread->Valid());
       EAGLE_ASSERT(accept_thread && accept_thread->Valid());
       return;
    }
