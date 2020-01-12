@@ -7,18 +7,20 @@
 
 #include "Eagle/Events.hpp"
 #include "Eagle/Exception.hpp"
+
 #include <string>
+
 #include "../eagle/BinStream.hpp"
 
 
 
 class EagleSystem;
-struct NETWORK;
 class EagleThread;
+struct NETWORK;
 
 
 
-class Network : public EagleEventSource {
+class Network : public EagleEventSource , public EagleObject {
 protected :
    NETWORK* net;
    EagleSystem* sys;
@@ -29,18 +31,21 @@ protected :
 
 public :
    
-   virtual ~Network() {Close();}
    
-   void Close();
+   virtual ~Network() {}/// Does not close! Override!
+   
+   virtual void Close();
    
    NETWORK* GetNetwork() {return net;}
-   std::string GetOurIP();
-   std::string GetOurPORT();
+   virtual std::string GetOurIP();
+   virtual std::string GetOurPORT();
+   virtual std::string GetDestIP();
+   virtual std::string GetDestPORT();
    
    virtual bool Ready() {return false;}
    
-   bool SendPacket(const BinStream& bin);
-   bool SendPacket(const void* data , unsigned int SZ);
+   virtual bool SendPacket(const BinStream& bin);
+   virtual bool SendPacket(const void* data , unsigned int SZ);
    
    friend void* ReceiverThread(EagleThread* thread , void* data);
 };
