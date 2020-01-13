@@ -106,13 +106,11 @@
 			<Add option="-Wall" />
 			<Add directory="C:/mingw/i686-w64-mingw32/include" />
 			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/include" />
-			<Add directory="Nilorea/include" />
 			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/include" />
 		</Compiler>
 		<Linker>
 			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/cbbuild/lib" />
 			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/lib" />
-			<Add directory="Nilorea/build" />
 		</Linker>
 		<Unit filename="EagleThreadLog.txt" />
 		<Unit filename="NiloreaLog.txt" />
