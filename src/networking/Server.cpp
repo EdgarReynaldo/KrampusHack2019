@@ -153,6 +153,7 @@ void Server::RespondToEvent(EagleEvent e , EagleThread* thread) {
    Client* client = dynamic_cast<Client*>(e.network->srcNETWORK);
    EagleInfo() << StringPrintF("Received message %s from client at %s :\n%s" ,
                                 evname.c_str() , client->net->link.ip , (const char*)e.network-> data) << std::endl;
+   e.source = this;
    EmitEvent(e,thread);
 }
 
