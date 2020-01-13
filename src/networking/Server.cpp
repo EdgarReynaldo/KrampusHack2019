@@ -89,6 +89,9 @@ void* AcceptThread(EagleThread* thread , void* data) {
 //            return 0;
 //         }
       }
+      else {
+         EagleWarn() << "Failed to get networking state from Nilorea" << std::endl;
+      }
    }
    delete client;
    
