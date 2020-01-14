@@ -85,9 +85,9 @@ bool Client::Accept(unsigned int timeout_msecs , NETWORK* network) {
    }
 
    int ret = 0;
-   NETWORK* newnet = netw_accept_from_ex(network , 0 , 0 , 0 , 0 , 0 , timeout_msecs , &ret);
+   NETWORK* newnet = netw_accept_from_ex(network , 0 , 0 , 0 , 0 , 0 , timeout_msecs/1000 , &ret);
    if (!newnet) {
-      if (!(ret & ETIMEDOUT)) {
+      if (ret != ETIMEDOUT) {
          EagleInfo() << StringPrintF("netw_accept_from_ex failed with return value %d" , ret) << std::endl;
       }
       return false;

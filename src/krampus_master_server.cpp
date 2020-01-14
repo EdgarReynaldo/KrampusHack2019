@@ -28,10 +28,14 @@ int main(int argc , char** argv) {
       return -1;
    }
    
+   al_set_new_window_position(-10000 , -10000);
+   EagleGraphicsContext* win = a5sys->CreateGraphicsContext("offscreen window" , 100 , 100 , EAGLE_WINDOWED);
+   
+   
    
    Server* master_server = new Server(a5sys , "8888" , 12);
    
-   EagleEventHandler* q = a5sys->CreateEventHandler();
+   EagleEventHandler* q = a5sys->GetSystemQueue();//CreateEventHandler();
    
    Client* client = new Client(a5sys);
    
@@ -55,8 +59,10 @@ int main(int argc , char** argv) {
    EAGLE_ASSERT(client->SendPacket(bdat));
    EAGLE_ASSERT(master_server->SendPacket(bdat2));
    
-   do {
-      EagleEvent e = q->WaitForEvent(MAIN_THREAD);
+   bool quit = false;
+   
+   while (!quit) {
+      EagleEvent e = a5sys->WaitForSystemEventAndUpdateState();
       EagleInfo() << EagleEventName(e.type) << std::endl;
       if (e.type == EAGLE_EVENT_DISPLAY_CLOSE) {
          break;
@@ -75,7 +81,7 @@ int main(int argc , char** argv) {
       if (IsNetworkEvent(e)) {
          delete e.network;
       }
-   } while (q->HasEvent());
+   }
 
 
    delete client;

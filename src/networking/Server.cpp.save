@@ -73,10 +73,8 @@ void* AcceptThread(EagleThread* thread , void* data) {
             client = new Client(server->System());
          }
          else {
-            EAGLE_DEBUG(
-               EagleInfo() << "Client accept timed out" << std::endl;
-            );
-         }
+               
+               
       }
       else {
          ThreadUnLockMutex(thread , server->mutex);
