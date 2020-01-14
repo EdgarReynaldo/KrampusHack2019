@@ -39,7 +39,8 @@ int main(int argc , char** argv) {
    
    Client* client = new Client(a5sys);
    
-   bool success = client->Connect("192.168.56.1" , master_server->GetOurPORT());
+//   bool success = client->Connect("192.168.56.1" , master_server->GetOurPORT());
+   bool success = client->Connect("10.0.2.15" , master_server->GetOurPORT());
 //   bool success = client->Connect(GetLocalIP() , master_server->GetOurPORT());
 
    EagleInfo() << "Connect was " << (success?"successful":"not successful") << std::endl;
