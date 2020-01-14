@@ -56,8 +56,12 @@ int main(int argc , char** argv) {
    bdat << StringPrintF("Testing message to server");
    bdat2 << StringPrintF("Testing message to client");
    
-   EAGLE_ASSERT(client->SendPacket(bdat));
-   EAGLE_ASSERT(master_server->SendPacket(bdat2));
+   if (!client->SendPacket(bdat)) {
+      EagleInfo() << "Failed to send packet 1." << std::endl;
+   }
+   if (!master_server->SendPacket(bdat2)) {
+      EagleInfo() << "Failed to send packet 2." << std::endl;
+   }
    
    bool quit = false;
    
