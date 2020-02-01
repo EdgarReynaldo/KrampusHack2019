@@ -56,6 +56,9 @@ class Server : public Network , public EagleEventListener {
    
    virtual void RespondToEvent(EagleEvent e , EagleThread* thread = MAIN_THREAD);
 
+   void AddClient(Client* client);
+   void RemoveClient(CLIENTID cid);
+
 private :
 //   Server(const Server& s); {}///< Copying a server is not allowed
    Server(const Server& s) :

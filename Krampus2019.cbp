@@ -105,15 +105,17 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/include" />
+			<Add directory="E:/LIBS/LIBS81Redistro/Eagle/include" />
 			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525Trans/include" />
 			<Add directory="Nilorea/include" />
 		</Compiler>
 		<Linker>
-			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/cbbuild/lib" />
-			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/lib" />
+			<Add directory="E:/LIBS/LIBS81Redistro/Eagle/lib" />
 			<Add directory="Nilorea/build" />
+			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/lib" />
 		</Linker>
+		<Unit filename="krampus_main.cpp" />
+		<Unit filename="krampus_server.cpp" />
 		<Unit filename="src/eagle/Transitions.cpp" />
 		<Unit filename="src/eagle/Transitions.hpp" />
 		<Unit filename="src/globals.cpp" />
@@ -126,7 +128,6 @@
 		<Unit filename="src/krampus/Menu.hpp" />
 		<Unit filename="src/krampus/Scenes.cpp" />
 		<Unit filename="src/krampus/Scenes.hpp" />
-		<Unit filename="src/krampus_main.cpp" />
 		<Unit filename="src/networking/Client.cpp" />
 		<Unit filename="src/networking/Client.hpp" />
 		<Unit filename="src/networking/Network.cpp" />

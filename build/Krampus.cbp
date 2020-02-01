@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Krampus"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="KrampusObjects">
+				<Option output="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/CMakeFiles/KrampusObjects.dir/KrampusObjects.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 KrampusObjects"/>
+					<CompileFile command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="KrampusObjects/fast">
+				<Option output="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/CMakeFiles/KrampusObjects.dir/KrampusObjects.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 KrampusObjects/fast"/>
+					<CompileFile command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="KrampusMasterServer">
+				<Option output="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/KrampusMasterServerDebug.exe.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 KrampusMasterServer"/>
+					<CompileFile command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="KrampusMasterServer/fast">
+				<Option output="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/KrampusMasterServerDebug.exe.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 KrampusMasterServer/fast"/>
+					<CompileFile command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="KrampusServer">
+				<Option output="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/KrampusServerDebug.exe.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 KrampusServer"/>
+					<CompileFile command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="KrampusServer/fast">
+				<Option output="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/KrampusServerDebug.exe.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 KrampusServer/fast"/>
+					<CompileFile command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="KrampusClient">
+				<Option output="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/KrampusClientDebug.exe.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 KrampusClient"/>
+					<CompileFile command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="KrampusClient/fast">
+				<Option output="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/KrampusClientDebug.exe.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/mingw/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 KrampusClient/fast"/>
+					<CompileFile command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/mingw/bin/mingw32-make.exe -f &quot;C:/ctwoplus/progcode/allegro5/KrampusHack2019/build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/krampus_main.cpp">
+			<Option target="KrampusClient"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/krampus_master_server.cpp">
+			<Option target="KrampusMasterServer"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/krampus_server.cpp">
+			<Option target="KrampusServer"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/eagle/BinStream.cpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/eagle/BinStream.hpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/eagle/Transitions.cpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/eagle/Transitions.hpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/globals.cpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/globals.hpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/krampus/Entity.cpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/krampus/Entity.hpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/krampus/Game.cpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/krampus/Game.hpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/krampus/Menu.cpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/krampus/Menu.hpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/krampus/Scenes.cpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/krampus/Scenes.hpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/networking/Client.cpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/networking/Client.hpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/networking/Network.cpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/networking/Network.hpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/networking/Server.cpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/networking/Server.cpp.save">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/networking/Server.hpp">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/src/networking/Server.hpp.save">
+			<Option target="KrampusObjects"/>
+		</Unit>
+		<Unit filename="C:/ctwoplus/progcode/allegro5/KrampusHack2019/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

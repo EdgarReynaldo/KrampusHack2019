@@ -3,9 +3,9 @@
 
 #include "Eagle.hpp"
 #define CINTERFACE
-#include "Network.hpp"
+#include "networking/Network.hpp"
 #include "nilorea.h"
-#include "Server.hpp"
+#include "networking/Server.hpp"
 
 
 
@@ -40,7 +40,7 @@ void* ReceiverThread(EagleThread* thread , void* data) {
          int STATE = 0;
          int ENGINE_STATE = 0;
          netw_get_state(net , &STATE , &ENGINE_STATE);
-         EagleInfo() << StringPrintF("ReceiverThread %p says network state is %d , %d" , thread , STATE , ENGINE_STATE) << std::endl;
+//         EagleInfo() << StringPrintF("ReceiverThread %p says network state is %d , %d" , thread , STATE , ENGINE_STATE) << std::endl;
          if (STATE == NETW_EXIT_ASKED) {
             EagleWarn() << "Network asked us to exit" << std::endl;
             break;

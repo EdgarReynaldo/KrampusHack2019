@@ -3,8 +3,8 @@
 
 #define CINTERFACE
 
-#include "Client.hpp"
-#include "Server.hpp"
+#include "networking/Client.hpp"
+#include "networking/Server.hpp"
 #include "Eagle.hpp"
 #include "nilorea.h"
 
@@ -87,8 +87,10 @@ bool Client::Accept(unsigned int timeout_msecs , NETWORK* network) {
    int ret = 0;
    NETWORK* newnet = netw_accept_from_ex(network , 0 , 0 , 0 , 0 , 0 , timeout_msecs/1000 , &ret);
    if (!newnet) {
-      if (ret != ETIMEDOUT) {
-         EagleInfo() << StringPrintF("netw_accept_from_ex failed with return value %d" , ret) << std::endl;
+      if (ret) {
+         if (ret != ETIMEDOUT) {
+            EagleInfo() << StringPrintF("netw_accept_from_ex failed with return value %d" , ret) << std::endl;
+         }
       }
       return false;
    }

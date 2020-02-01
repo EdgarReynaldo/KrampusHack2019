@@ -2,8 +2,8 @@
 
 
 
-#include "Scenes.hpp"
-#include "../globals.hpp"
+#include "krampus/Scenes.hpp"
+#include "globals.hpp"
 #include "Eagle.hpp"
 #include "Eagle/backends/Allegro5Backend.hpp"
 

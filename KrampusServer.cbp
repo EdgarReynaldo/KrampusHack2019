@@ -3,6 +3,8 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="KrampusServer" />
+		<Option makefile_is_custom="1" />
+		<Option execution_dir="C:/ctwoplus/progcode/allegro5/KrampusHack2019/build" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -107,23 +109,47 @@
 			<Add directory="C:/mingw/i686-w64-mingw32/include" />
 			<Add directory="E:/LIBS/LIBS81Redistro/Eagle/include" />
 			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/include" />
+			<Add directory="include" />
 		</Compiler>
 		<Linker>
 			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/lib" />
 			<Add directory="E:/LIBS/LIBS81Redistro/Eagle/lib" />
 		</Linker>
+		<Unit filename="CMakeLists.txt" />
 		<Unit filename="EagleLog.txt" />
 		<Unit filename="EagleThreadLog.txt" />
 		<Unit filename="NiloreaLog.txt" />
+		<Unit filename="README.txt" />
+		<Unit filename="allegro.log" />
+		<Unit filename="include/eagle/BinStream.hpp" />
+		<Unit filename="include/eagle/ConsoleWidget.hpp" />
+		<Unit filename="include/eagle/Transitions.hpp" />
+		<Unit filename="include/globals.hpp" />
+		<Unit filename="include/krampus/Entity.hpp" />
+		<Unit filename="include/krampus/Game.hpp" />
+		<Unit filename="include/krampus/Menu.hpp" />
+		<Unit filename="include/krampus/Scenes.hpp" />
+		<Unit filename="include/networking/Client.hpp" />
+		<Unit filename="include/networking/Network.hpp" />
+		<Unit filename="include/networking/Server.hpp" />
+		<Unit filename="krampus_main.cpp" />
+		<Unit filename="krampus_master_server.cpp">
+			<Option link="0" />
+		</Unit>
+		<Unit filename="krampus_server.cpp">
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/eagle/BinStream.cpp" />
-		<Unit filename="src/eagle/BinStream.hpp" />
-		<Unit filename="src/krampus_master_server.cpp" />
+		<Unit filename="src/eagle/ConsoleWidget.cpp" />
+		<Unit filename="src/eagle/Transitions.cpp" />
+		<Unit filename="src/globals.cpp" />
+		<Unit filename="src/krampus/Entity.cpp" />
+		<Unit filename="src/krampus/Game.cpp" />
+		<Unit filename="src/krampus/Menu.cpp" />
+		<Unit filename="src/krampus/Scenes.cpp" />
 		<Unit filename="src/networking/Client.cpp" />
-		<Unit filename="src/networking/Client.hpp" />
 		<Unit filename="src/networking/Network.cpp" />
-		<Unit filename="src/networking/Network.hpp" />
 		<Unit filename="src/networking/Server.cpp" />
-		<Unit filename="src/networking/Server.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

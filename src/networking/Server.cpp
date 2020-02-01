@@ -9,7 +9,7 @@
 
 #define _WIN32_WINNT 0x0600
 
-#include "Server.hpp"
+#include "networking/Server.hpp"
 #include "Eagle.hpp"
 #undef CreateMutex
 
@@ -49,7 +49,7 @@
 
 
 
-#include "Client.hpp"
+#include "networking/Client.hpp"
 
 
 
@@ -67,14 +67,13 @@ void* AcceptThread(EagleThread* thread , void* data) {
          ThreadUnLockMutex(thread , server->mutex);
          if (client->Accept(1000 /* MS */ , server->GetNetwork())) {/// 250 MS timeout on accept
             ThreadLockMutex(thread , server->mutex);
-            server->clients.AddClient(client);
-            server->ListenTo(client);
+            server->AddClient(client);
             ThreadUnLockMutex(thread , server->mutex);
             client = new Client(server->System());
          }
          else {
             EAGLE_DEBUG(
-               EagleInfo() << "Client accept timed out" << std::endl;
+//               EagleInfo() << "Client accept timed out" << std::endl;
             );
          }
       }
@@ -84,15 +83,12 @@ void* AcceptThread(EagleThread* thread , void* data) {
       int STATE = 0;
       int ENGINE_STATE = 0;
       if (netw_get_state(server->GetNetwork() , &STATE , &ENGINE_STATE)) {
-         EagleInfo() << StringPrintF("Server state : %d , engine state : %d" , STATE , ENGINE_STATE) << std::endl;
+//         EagleInfo() << StringPrintF("Server state : %d , engine state : %d" , STATE , ENGINE_STATE) << std::endl;
          if (STATE != NETW_RUN) {
             EagleCritical() << "Network down!" << std::endl;
+            delete client;
             return 0;
          }
-//         if (ENGINE_STATE != NETW_THR_ENGINE_STARTED) {
-//            EagleError() << "Network thread engine stopped!" << std::endl;
-//            return 0;
-//         }
       }
       else {
          EagleWarn() << "Failed to get networking state from Nilorea" << std::endl;
@@ -166,6 +162,23 @@ void Server::RespondToEvent(EagleEvent e , EagleThread* thread) {
 }
 
 
+
+void Server::AddClient(Client* client) {
+   clients.AddClient(client);
+   ListenTo(client);
+}
+
+
+
+void Server::RemoveClient(CLIENTID cid) {
+   std::map<CLIENTID , Client*>::iterator it = clients.client_map.find(cid);
+   if (it != clients.client_map.end()) {
+      StopListeningTo(it->second);
+      clients.RemoveClient(it->second);
+   }
+}
+
+   
 
 bool Server::BroadcastPacket(const BinStream& bin) {
    return BroadcastPacket(bin.Data() , bin.Size());

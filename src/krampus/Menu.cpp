@@ -2,8 +2,8 @@
 
 
 
-#include "Menu.hpp"
-#include "../globals.hpp"
+#include "krampus/Menu.hpp"
+#include "globals.hpp"
 
 
 const char* menu_strs[NUM_MENU_OPTIONS] = {

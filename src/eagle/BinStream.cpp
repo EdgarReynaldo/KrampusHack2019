@@ -2,7 +2,7 @@
 
 
 
-#include "BinStream.hpp"
+#include "eagle/BinStream.hpp"
 #include "Eagle/Exception.hpp"
 
 
@@ -28,6 +28,32 @@ void BinStream::PushData(const void* dat , unsigned int sz , bool reverse) {
    for (unsigned int i = 0 ; i < sz ; ++i) {
       bytes[end + i] = *(rdat--);
    }
+}
+
+
+
+bool BinStream::Seek(unsigned int bytenum) {
+   if (bytenum > Size()) {return false;}
+   offset = bytenum;
+   return true;
+}
+
+
+
+template <>
+BinStream& BinStream::operator>>(std::string& str) {
+   str.clear();
+   unsigned int sz = Size();
+   while (offset < sz) {
+      if (bytes[offset] != '\0') {
+         str.push_back(bytes[offset++]);
+      }
+      else {
+         offset++;/// skip the null
+         break;
+      }
+   }
+   return *this;
 }
 
 
