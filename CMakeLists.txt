@@ -22,45 +22,47 @@ set(EAGLE_LIB_DIR   "${EAGLE_DIR}/lib"   CACHE PATH "Eagle lib directory"     FO
 set(ALLEGRO_LIB_DIR "${ALLEGRO_DIR}/lib" CACHE PATH "Allegro 5 lib directory" FORCE)
 set(NILOREA_LIB_DIR "${NILOREA_DIR}/lib" CACHE PATH "Nilorea lib directory"   FORCE)
 
+find_library(EAGLE_LIB    EagleShared      ${EAGLE_LIB_DIR})
+find_library(EAGLE_A5_LIB EagleA5Shared    ${EAGLE_LIB_DIR})
+find_library(ALLEGRO_LIB  allegro_monolith ${ALLEGRO_LIB_DIR})
+find_library(NILOREA_LIB  nilorea          ${NILOREA_LIB_DIR})
 
-unset (EAGLE_LIB    CACHE)
-unset (EAGLE_A5_LIB CACHE)
-unset (ALLEGRO_LIB  CACHE)
-unset (NILOREA_LIB  CACHE)
+find_library(EAGLE_DEBUG_LIB    EagleDebugShared       ${EAGLE_LIB_DIR})
+find_library(EAGLE_DEBUG_A5_LIB EagleA5DebugShared     ${EAGLE_LIB_DIR})
+find_library(ALLEGRO_DEBUG_LIB  allegro_monolith-debug ${ALLEGRO_LIB_DIR})
+find_library(NILOREA_DEBUG_LIB  nilorea                ${NILOREA_LIB_DIR})
 
+find_library(EAGLE_STATIC_LIB    EagleStatic             ${EAGLE_LIB_DIR})
+find_library(EAGLE_STATIC_A5_LIB EagleA5Static           ${EAGLE_LIB_DIR})
+find_library(ALLEGRO_STATIC_LIB  allegro_monolith-static ${ALLEGRO_LIB_DIR})
+find_library(NILOREA_STATIC_LIB  nilorea                 ${NILOREA_LIB_DIR})
 
-if ("${CMAKE_BUILD_TYPE}" STREQUAL "DEBUG")
+find_library(EAGLE_DEBUG_STATIC_LIB    EagleDebugStatic       ${EAGLE_LIB_DIR})
+find_library(EAGLE_DEBUG_STATIC_A5_LIB EagleA5DebugStatic     ${EAGLE_LIB_DIR})
+find_library(ALLEGRO_DEBUG_STATIC_LIB  allegro_monolith-debug-static ${ALLEGRO_LIB_DIR})
+find_library(NILOREA_DEBUG_STATIC_LIB  nilorea                ${NILOREA_LIB_DIR})
 
-   if (SHARED)
-      find_library(EAGLE_LIB    EagleDebugShared       ${EAGLE_LIB_DIR})
-      find_library(EAGLE_A5_LIB EagleA5DebugShared     ${EAGLE_LIB_DIR})
-      find_library(ALLEGRO_LIB  allegro_monolith-debug ${ALLEGRO_LIB_DIR})
-      find_library(NILOREA_LIB  nilorea                ${NILOREA_LIB_DIR})
+set(LIBS_RELEASE "${EAGLE_LIB}" "${EAGLE_A5_LIB}" "${ALLEGRO_LIB}" "${NILOREA_LIB}" CACHE STRING "Link libs" FORCE)
+
+set(LIBS_DEBUG "${EAGLE_DEBUG_LIB}" "${EAGLE_DEBUG_A5_LIB}" "${ALLEGRO_DEBUG_LIB}" "${NILOREA_DEBUG_LIB}" CACHE STRING "Link libs" FORCE)
+
+set(LIBS_STATIC "${EAGLE_STATIC_LIB}" "${EAGLE_STATIC_A5_LIB}" "${ALLEGRO_STATIC_LIB}" "${NILOREA_STATIC_LIB}" CACHE STRING "Link libs" FORCE)
+
+set(LIBS_DEBUG_STATIC "${EAGLE_DEBUG_STATIC_LIB}" "${EAGLE_DEBUG_STATIC_A5_LIB}" "${ALLEGRO_DEBUG_STATIC_LIB}" "${NILOREA_DEBUG_STATIC_LIB}" CACHE STRING "Link libs" FORCE)
+
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+   if (SHARED) 
+      set(LINK_LIBS "${LIBS_DEBUG}" CACHE STRING "Link libraries" FORCE)
    else()
-      find_library(EAGLE_LIB    EagleDebugStatic              ${EAGLE_LIB_DIR})
-      find_library(EAGLE_A5_LIB EagleA5DebugStatic            ${EAGLE_LIB_DIR})
-      find_library(ALLEGRO_LIB  allegro_monolith-debug-static ${ALLEGRO_LIB_DIR})
-      find_library(NILOREA_LIB  nilorea                       ${NILOREA_LIB_DIR})
-   endif()
-
-else() #CMAKE_BUILD_TYPE != DEBUG
-
+      set(LINK_LIBS "${LIBS_STATIC_DEBUG}" CACHE STRING "Link libraries" FORCE)
+   endif(SHARED)
+else()
    if (SHARED)
-      find_library(EAGLE_LIB    EagleShared      ${EAGLE_LIB_DIR})
-      find_library(EAGLE_A5_LIB EagleA5Shared    ${EAGLE_LIB_DIR})
-      find_library(ALLEGRO_LIB  allegro_monolith ${ALLEGRO_LIB_DIR})
-      find_library(NILOREA_LIB  nilorea          ${NILOREA_LIB_DIR})
+      set(LINK_LIBS "${LIBS_RELEASE}" CACHE STRING "Link libraries" FORCE)
    else()
-      find_library(EAGLE_LIB    EagleStatic             ${EAGLE_LIB_DIR})
-      find_library(EAGLE_A5_LIB EagleA5Static           ${EAGLE_LIB_DIR})
-      find_library(ALLEGRO_LIB  allegro_monolith-static ${ALLEGRO_LIB_DIR})
-      find_library(NILOREA_LIB  nilorea                 ${NILOREA_LIB_DIR})
+      set(LINK_LIBS "${LIBS_STATIC}" CACHE STRING "Link libraries" FORCE)
    endif()
-
 endif()
-
-set(LIBS "${EAGLE_LIB}" "${EAGLE_A5_LIB}" "${ALLEGRO_LIB}" "${NILOREA_LIB}" CACHE STRING "Link libs" FORCE)
-
 
 add_library(KrampusObjects OBJECT "${KEngineSRC}")
 
@@ -93,9 +95,9 @@ target_link_libraries(KrampusMasterServer PUBLIC KrampusObjects)
 target_link_libraries(KrampusServer       PUBLIC KrampusObjects)
 target_link_libraries(KrampusClient       PUBLIC KrampusObjects)
 
-target_link_libraries(KrampusMasterServer PUBLIC ${LIBS})
-target_link_libraries(KrampusServer       PUBLIC ${LIBS})
-target_link_libraries(KrampusClient       PUBLIC ${LIBS})
+target_link_libraries(KrampusMasterServer PUBLIC ${LINK_LIBS})
+target_link_libraries(KrampusServer       PUBLIC ${LINK_LIBS})
+target_link_libraries(KrampusClient       PUBLIC ${LINK_LIBS})
 
 if (WIN32)
    target_link_libraries(KrampusMasterServer PUBLIC ws2_32)
