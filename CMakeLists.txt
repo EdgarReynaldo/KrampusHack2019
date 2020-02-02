@@ -73,14 +73,23 @@ add_executable(KrampusServer "krampus_server.cpp")# ${KrampusObjects})
 add_executable(KrampusClient "krampus_main.cpp")# ${KrampusObjects})
 
 set(PFX "Krampus")
+
 set(TSFX "")
+
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
    string(APPEND TSFX "Debug")
+   target_compile_options(KrampusMasterServer PUBLIC "-fsanitize=address")
+   target_compile_options(KrampusServer PUBLIC "-fsanitize=address")
+   target_compile_options(KrampusClient PUBLIC "-fsanitize=address")
+
 endif()
+
 set(ESFX "")
+
 if (WIN32)
 #   string(APPEND ESFX ".exe")
 endif()
+
 set (SFX "${TSFX}${ESFX}")
 
 set_target_properties(KrampusMasterServer PROPERTIES OUTPUT_NAME "${PFX}MasterServer${SFX}")
@@ -91,6 +100,7 @@ target_include_directories(KrampusMasterServer PUBLIC ${INCLUDE_DIRS})
 target_include_directories(KrampusServer       PUBLIC ${INCLUDE_DIRS})
 target_include_directories(KrampusClient       PUBLIC ${INCLUDE_DIRS})
 
+
 target_link_libraries(KrampusMasterServer PUBLIC KrampusObjects)
 target_link_libraries(KrampusServer       PUBLIC KrampusObjects)
 target_link_libraries(KrampusClient       PUBLIC KrampusObjects)
@@ -100,9 +110,9 @@ target_link_libraries(KrampusServer       PUBLIC ${LINK_LIBS})
 target_link_libraries(KrampusClient       PUBLIC ${LINK_LIBS})
 
 if (WIN32)
-   target_link_libraries(KrampusMasterServer PUBLIC ws2_32)
-   target_link_libraries(KrampusServer       PUBLIC ws2_32)
-   target_link_libraries(KrampusClient       PUBLIC ws2_32)
+   target_link_libraries(KrampusMasterServer PUBLIC asan ws2_32)
+   target_link_libraries(KrampusServer       PUBLIC asan ws2_32)
+   target_link_libraries(KrampusClient       PUBLIC asan ws2_32)
 endif()
 
 install(TARGETS KrampusMasterServer KrampusServer KrampusClient DESTINATION ${CMAKE_INSTALL_PREFIX})
