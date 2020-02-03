@@ -28,7 +28,7 @@ int main(int argc , char** argv) {
    
    EAGLE_ASSERT(a5sys);
    
-   const int sysflags = EAGLE_SYSTEM;
+   const int sysflags = EAGLE_FULL_SETUP;
    if (!(sysflags & a5sys->Initialize(sysflags))) {
       return -1;
    }
@@ -71,6 +71,7 @@ int main(int argc , char** argv) {
    
    gui.SetRootLayout(&rlayout);
    
+   a5sys->GetSystemTimer()->Start();
    
    bool redraw = true;
    bool quit = false;
@@ -86,7 +87,9 @@ int main(int argc , char** argv) {
          
       do {
          EagleEvent e = a5sys->WaitForSystemEventAndUpdateState();
-         EagleInfo() << EagleEventName(e.type) << std::endl;
+         if (e.type != EAGLE_EVENT_MOUSE_AXES && e.type != EAGLE_EVENT_TIMER) {
+            EagleInfo() << EagleEventName(e.type) << std::endl;
+         }
          if (e.type == EAGLE_EVENT_DISPLAY_CLOSE) {
             quit = true;
             break;
@@ -97,6 +100,10 @@ int main(int argc , char** argv) {
          }
          if (e.type == EAGLE_EVENT_NETWORK_RECV_MSG) {
             
+         }
+         gui.HandleEvent(e);
+         if (e.type == EAGLE_EVENT_TIMER) {
+            gui.Update(e.timer.eagle_timer_source->SPT());
          }
          if (IsNetworkEvent(e)) {
             delete e.network;
