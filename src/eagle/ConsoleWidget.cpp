@@ -42,7 +42,7 @@ void EditText::Overwrite(std::string instr , int caretLine , int caretPos) {
       DeleteSelection(caret_line , caret_line , caret_pos , caret_pos + 1);
    }
    Insert(instr , caret_line , caret_pos);
-   MoveCaretLeftOrRight(EAGLE_KEY_RIGHT , false);
+   OldMoveCaretLeftOrRight(EAGLE_KEY_RIGHT , false , false);
 }
 
 
@@ -64,7 +64,6 @@ int EditText::PrivateHandleEvent(EagleEvent e) {
    if (e.type == EAGLE_EVENT_KEY_CHAR) {
       /// Make sure it is an ascii character
       std::string newstr = "";
-      newstr.push_back((char)e.keyboard.keycode);
       if (e.keyboard.unicode <= 27) {
          /// Control key, or invisible
          if (e.keyboard.keycode == EAGLE_KEY_TAB) {
@@ -74,15 +73,22 @@ int EditText::PrivateHandleEvent(EagleEvent e) {
             }
          }
       }
-      if (Insert()) {
-         /// Insert mode
-         Insert(newstr , caret_line , caret_pos);
-      }
       else {
-         /// Overwrite
-         Overwrite(newstr , caret_line , caret_pos);
+         newstr.push_back((char)e.keyboard.keycode);
       }
+      if (newstr.size()) {
+         if (Insert()) {
+            /// Insert mode
+            Insert(newstr , caret_line , caret_pos);
+         }
+         else {
+            /// Overwrite
+            Overwrite(newstr , caret_line , caret_pos);
+         }
+      }
+      return DIALOG_INPUT_USED;
    }
+   return DIALOG_OKAY;
 }
 
 

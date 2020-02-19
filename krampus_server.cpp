@@ -80,6 +80,7 @@ int main(int argc , char** argv) {
          
       if (redraw) {
          win->Clear();
+         gui.SetRedrawAllFlag();
          gui.Display(win , 0 , 0);
          win->FlipDisplay();
          redraw = false;
@@ -104,6 +105,7 @@ int main(int argc , char** argv) {
          gui.HandleEvent(e);
          if (e.type == EAGLE_EVENT_TIMER) {
             gui.Update(e.timer.eagle_timer_source->SPT());
+            redraw = true;
          }
          if (IsNetworkEvent(e)) {
             delete e.network;
