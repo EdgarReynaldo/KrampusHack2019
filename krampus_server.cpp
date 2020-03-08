@@ -10,6 +10,10 @@
 #include "networking/Client.hpp"
 #include "networking/Server.hpp"
 
+#include "eagle/ConsoleWidget.hpp"
+
+
+
 
 int main(int argc , char** argv) {
    
@@ -63,7 +67,7 @@ int main(int argc , char** argv) {
    
    rlayout.Resize(1);
    
-   SelectText seltext;
+   EditText seltext;
    
    seltext.SetText("Hello, this is some\nmulti-line text\nso there\n" , fnt);
 
@@ -72,7 +76,11 @@ int main(int argc , char** argv) {
    gui.SetRootLayout(&rlayout);
    
    a5sys->GetSystemTimer()->Start();
+
+//   seltext.Refresh();
    
+   EagleInfo() << seltext << std::endl;
+      
    bool redraw = true;
    bool quit = false;
    
@@ -80,8 +88,25 @@ int main(int argc , char** argv) {
          
       if (redraw) {
          win->Clear();
+         int start = 0 , close = 0 , left = 0 , right = 0;
+         seltext.GetSelection(&start , &close , &left , &right);
+         int selLine = 0 , selPos = 0 , caretLine = 0 , caretPos = 0;
+         seltext.GetCaretAttributes(&selLine , &selPos , &caretLine , &caretPos);
+         
          gui.SetRedrawAllFlag();
          gui.Display(win , 0 , 0);
+         
+         win->DrawTextString(fnt , StringPrintF("Start = %d,%d , Close = %d,%d" , start , left , close , right) ,
+                             10 , 10 , EagleColor(255,255,255));
+         
+         win->DrawTextString(fnt , StringPrintF("Caret = L%d P%d Selection = L%d P%d" , caretLine , caretPos , selLine , selPos),
+                             10 , 50 , EagleColor(255,255,255));
+         
+         win->DrawTextString(fnt , StringPrintF("FOCUS = %s" , seltext.FlagOn(HASFOCUS)?"true":"false") ,
+                             10 , sh - 80 , EagleColor(255,255,255)); 
+         win->DrawTextString(fnt , StringPrintF("SHIFT = %s" , (input_key_held(EAGLE_KEY_ANY_SHIFT)?"true":"false")) ,
+                             10 , sh - 40 , EagleColor(255,255,0));
+         
          win->FlipDisplay();
          redraw = false;
       }
@@ -90,6 +115,11 @@ int main(int argc , char** argv) {
          EagleEvent e = a5sys->WaitForSystemEventAndUpdateState();
          if (e.type != EAGLE_EVENT_MOUSE_AXES && e.type != EAGLE_EVENT_TIMER) {
             EagleInfo() << EagleEventName(e.type) << std::endl;
+            if (e.type == EAGLE_EVENT_KEY_CHAR) {
+               EagleInfo() << Indenter() << 
+                  StringPrintF("CHAR event : allegro key (%d){%d} name : %s" , 
+                               e.keyboard.keycode , e.keyboard.unicode , al_keycode_to_name(e.keyboard.keycode)) << std::endl;
+            }
          }
          if (e.type == EAGLE_EVENT_DISPLAY_CLOSE) {
             quit = true;
@@ -120,3 +150,33 @@ int main(int argc , char** argv) {
    
    return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

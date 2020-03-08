@@ -29,18 +29,25 @@ protected :
    virtual void OnAreaChanged();
    virtual void OnFlagChanged(WIDGET_FLAGS f , bool on);
    
-   /// EditText
-   
-   void DeleteSelection(int selectLineStart , int selectLineStop , int selectLeft , int selectRight);
-   void Insert(std::string instr , int caretLine , int caretPos);
-   void Overwrite(std::string instr , int caretLine , int caretPos);
+   /// SelectText
+   virtual void DrawCaret(EagleGraphicsContext* win , int xpos , int ypos);
 
+   /// EditText
+   void DrawOverwriteCaret(EagleGraphicsContext* win , int xpos , int ypos);
+   
+   void Insert(std::string instr , int caretLine , int caretPos);
+
+   void DeleteSelection(int selLineStart , int selLineStop , int selLeft , int selRight);
+   void Overwrite(std::string instr , int selLineStart , int selLineStop , int selLeft , int selRight);
+   
 public :
    
    EditText(std::string classname = "EditText" , std::string objname = "Nemo");
    
-   bool Insert() {return insert_mode;}
-   bool Overwrite() {return !insert_mode;}
+   bool Insert();
+   bool Overwrite();
+   
+   void SetTabSpacing(unsigned int ntabspaces);
 };
 
 
