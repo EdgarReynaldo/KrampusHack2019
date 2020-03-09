@@ -132,6 +132,7 @@
 		<Unit filename="include/networking/Client.hpp" />
 		<Unit filename="include/networking/Network.hpp" />
 		<Unit filename="include/networking/Server.hpp" />
+		<Unit filename="krampus_client.cpp" />
 		<Unit filename="krampus_main.cpp" />
 		<Unit filename="krampus_master_server.cpp">
 			<Option link="0" />
@@ -151,10 +152,6 @@
 		<Unit filename="src/networking/Network.cpp" />
 		<Unit filename="src/networking/Server.cpp" />
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
-			<fortran_project />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
