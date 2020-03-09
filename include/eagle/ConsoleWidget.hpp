@@ -6,53 +6,57 @@
 #define ConsoleWidget_HPP
 
 
-#include "Eagle/Gui/Text/SelectText.hpp"
+#include "Eagle/Gui/WidgetBase.hpp"
+#include "Eagle/Gui/Text/EditText.hpp"
+#include "Eagle/Font.hpp"
+
+#include <deque>
 
 
 
-class EditText : public SelectText {
+class ConsoleLog : public WidgetBase {
+   std::deque<std::string> loglines;
+   int NHISTORY;
+   EagleFont* font;
    
-protected :
-   
-   bool insert_mode;
-   unsigned int pixscroll;
-   unsigned int NTABSPACES;
-   
-   
-   
-   /// WIDGETBASE
-   virtual int PrivateHandleEvent(EagleEvent e);
-   virtual int PrivateCheckInputs();
+   /// Private interface, override to define behavior
+   virtual int PrivateHandleEvent(EagleEvent ee);
+//   virtual int PrivateCheckInputs();
+//   virtual int PrivateUpdate(double dt);
    virtual void PrivateDisplay(EagleGraphicsContext* win , int xpos , int ypos);
-   virtual int PrivateUpdate(double tsec);
 
-   virtual void OnAreaChanged();
-   virtual void OnFlagChanged(WIDGET_FLAGS f , bool on);
-   
-   /// SelectText
-   virtual void DrawCaret(EagleGraphicsContext* win , int xpos , int ypos);
-
-   /// EditText
-   void DrawOverwriteCaret(EagleGraphicsContext* win , int xpos , int ypos);
-   
-   void Insert(std::string instr , int caretLine , int caretPos);
-
-   void DeleteSelection(int selLineStart , int selLineStop , int selLeft , int selRight);
-   void Overwrite(std::string instr , int selLineStart , int selLineStop , int selLeft , int selRight);
+   /// Callbacks, override and/or call if you need to
+//   virtual void OnAreaChanged();
    
 public :
+   ConsoleLog(std::string classname = "Console Log" , std::string objname = "Nemo");
    
-   EditText(std::string classname = "EditText" , std::string objname = "Nemo");
+   virtual void SetRedrawFlag() {SetBgRedrawFlag();}
    
-   bool Insert();
-   bool Overwrite();
-   
-   void SetTabSpacing(unsigned int ntabspaces);
+   void AddEntry(std::string s);
+   void Clear();
+   void SetFont(EagleFont* fnt) {font = fnt;}
+};
+
+extern const unsigned int TOPIC_CONSOLE;
+
+enum CONSOLE_MSGS {
+   CONSOLE_ENTER_PRESSED = 0
 };
 
 
-class ConsoleLog {
-   std::deque<std::string> loglines;
+
+class ConsoleEntry : public EditText {
+   
+   
+   int PrivateHandleEvent(EagleEvent e);
 };
+
+
 
 #endif // ConsoleWidget_HPP
+
+
+
+
+

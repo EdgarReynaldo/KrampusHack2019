@@ -70,7 +70,7 @@ target_include_directories(KrampusObjects PUBLIC "${INCLUDE_DIRS}")
 
 add_executable(KrampusMasterServer "krampus_master_server.cpp")# ${KrampusObjects})
 add_executable(KrampusServer "krampus_server.cpp")# ${KrampusObjects})
-add_executable(KrampusClient "krampus_main.cpp")# ${KrampusObjects})
+add_executable(KrampusClient "krampus_client.cpp")# ${KrampusObjects})
 
 set(PFX "Krampus")
 

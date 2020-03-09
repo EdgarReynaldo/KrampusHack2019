@@ -26,7 +26,7 @@ int main(int argc , char** argv) {
    set_log_file("NiloreaLog.txt");
    set_log_level(LOG_DEBUG);
    
-   SendOutputToFile("EagleLog.txt" , "KRAMPUS SERVER\n" , false);
+   SendOutputToFile("EagleLog.txt" , "KRAMPUS CLIENT\n" , false);
    
    Allegro5System* a5sys = GetAllegro5System();
    
@@ -39,16 +39,31 @@ int main(int argc , char** argv) {
    
    EagleGraphicsContext* win = a5sys->CreateGraphicsContext("offscreen window" , sw , sh , EAGLE_WINDOWED);
    
-   
-   Server* server = new Server(a5sys , "8888" , 12);
-   
    EagleEventHandler* q = a5sys->GetSystemQueue();//CreateEventHandler();
    
-   q->ListenTo(server);
+   Client* client = new Client(a5sys);
+   
+   std::string servip = "192.168.1.59";
+   if (argc > 1) {
+      servip = argv[1];
+   }
+   EagleInfo() << StringPrintF("Connecting to %s " , servip.c_str()) << std::endl;
+
+   bool success = client->Connect(servip.c_str() , "8888");
+
+   EagleInfo() << "Connect was " << (success?"successful":"not successful") << std::endl;
+   
+   if (!success) {
+      delete client;
+      return -1;
+   }
+   
+   q->ListenTo(client);
 
    
    EagleFont* fnt = win->LoadFont("Verdana.ttf" , -24);
    EAGLE_ASSERT(fnt && fnt->Valid());
+   
    
    WidgetHandler gui(win , "GUI" , "NEMOGUI");
    
@@ -62,7 +77,6 @@ int main(int argc , char** argv) {
    ConsoleEntry console;
    
    console.SetText("" , fnt);
-
    WidgetColorset& colors = *(console.GetWidgetColorset());
    colors[BGCOL] = EagleColor(0,64,64);
    colors[TXTCOL] = EagleColor(255,255,0);
@@ -95,11 +109,6 @@ int main(int argc , char** argv) {
          EagleEvent e = a5sys->WaitForSystemEventAndUpdateState();
          if (e.type != EAGLE_EVENT_MOUSE_AXES && e.type != EAGLE_EVENT_TIMER) {
             EagleInfo() << EagleEventName(e.type) << std::endl;
-            if (e.type == EAGLE_EVENT_KEY_CHAR) {
-               EagleInfo() << Indenter() << 
-                  StringPrintF("CHAR event : allegro key (%d){%d} name : %s" , 
-                               e.keyboard.keycode , e.keyboard.unicode , al_keycode_to_name(e.keyboard.keycode)) << std::endl;
-            }
          }
          if (e.type == EAGLE_EVENT_DISPLAY_CLOSE) {
             quit = true;
@@ -110,13 +119,18 @@ int main(int argc , char** argv) {
             break;
          }
          if (e.type == EAGLE_EVENT_NETWORK_RECV_MSG) {
-            std::string message = (const char*)e.network->data;
-            clog.AddEntry(message);
-            BinStream dat;
-            dat << message;
-            server->SendPacket(dat);
+            clog.AddEntry((std::string)(const char*)e.network->data);
+            redraw = true;
          }
-         gui.HandleEvent(e);
+         if (e.type == EAGLE_EVENT_KEY_DOWN && e.keyboard.keycode == EAGLE_KEY_ENTER) {
+            BinStream data;
+            data << console.GetText();
+            console.SetText("");
+            client->SendPacket(data);
+         }
+         else {
+            gui.HandleEvent(e);
+         }
          if (e.type == EAGLE_EVENT_TIMER) {
             gui.Update(e.timer.eagle_timer_source->SPT());
             redraw = true;
@@ -126,8 +140,8 @@ int main(int argc , char** argv) {
          }
       } while (!a5sys->UpToDate());
    }
-
-   delete server;
+   
+   delete client;
    
    return 0;
 }
