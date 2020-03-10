@@ -23,7 +23,7 @@ int main(int argc , char** argv) {
    (void)argc;
    (void)argv;
    
-   set_log_file("NiloreaLog.txt");
+   set_log_file("NiloreaClientLog.txt");
    set_log_level(LOG_DEBUG);
    
    SendOutputToFile("EagleLog.txt" , "KRAMPUS CLIENT\n" , false);

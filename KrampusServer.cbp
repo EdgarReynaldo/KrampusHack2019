@@ -115,12 +115,13 @@
 			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/lib" />
 			<Add directory="E:/LIBS/LIBS81Redistro/Eagle/lib" />
 		</Linker>
+		<Unit filename="../../bin/EagleLog.txt" />
+		<Unit filename="../../bin/EagleThreadLog.txt" />
+		<Unit filename="../../bin/NiloreaClientLog.txt" />
+		<Unit filename="../../bin/NiloreaServerLog.txt" />
+		<Unit filename="../../bin/allegro.log" />
 		<Unit filename="CMakeLists.txt" />
-		<Unit filename="EagleLog.txt" />
-		<Unit filename="EagleThreadLog.txt" />
-		<Unit filename="NiloreaLog.txt" />
 		<Unit filename="README.txt" />
-		<Unit filename="allegro.log" />
 		<Unit filename="include/eagle/BinStream.hpp" />
 		<Unit filename="include/eagle/ConsoleWidget.hpp" />
 		<Unit filename="include/eagle/Transitions.hpp" />
