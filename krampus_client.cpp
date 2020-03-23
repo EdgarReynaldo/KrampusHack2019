@@ -26,7 +26,7 @@ int main(int argc , char** argv) {
    set_log_file("NiloreaClientLog.txt");
    set_log_level(LOG_DEBUG);
    
-   SendOutputToFile("EagleLog.txt" , "KRAMPUS CLIENT\n" , false);
+   SendOutputToFile("EagleClientLog.txt" , "KRAMPUS CLIENT\n" , false);
    
    Allegro5System* a5sys = GetAllegro5System();
    
@@ -46,6 +46,10 @@ int main(int argc , char** argv) {
    std::string servip = "192.168.1.59";
    if (argc > 1) {
       servip = argv[1];
+   }
+   else {
+      EagleInfo() << "No ip address specified. Can't connect." << std::endl;
+      return -1;
    }
    EagleInfo() << StringPrintF("Connecting to %s " , servip.c_str()) << std::endl;
 

@@ -17,7 +17,7 @@ int main(int argc , char** argv) {
    set_log_file("NiloreaLog.txt");
    set_log_level(LOG_DEBUG);
    
-   SendOutputToFile("EagleLog.txt" , "KRAMPUS SERVER\n" , false);
+   SendOutputToFile("EagleMasterServerLog.txt" , "KRAMPUS MASTER SERVER\n" , false);
    
    Allegro5System* a5sys = GetAllegro5System();
    
@@ -49,8 +49,8 @@ int main(int argc , char** argv) {
    q->ListenTo(client);
 
       
-   a5sys->Rest(2.0);
-   n_log(LOG_DEBUG , "Rested 2.0 seconds");
+   a5sys->Rest(1.0);
+   n_log(LOG_DEBUG , "Rested 1.0 seconds");
 
    BinStream bdat;
    BinStream bdat2;

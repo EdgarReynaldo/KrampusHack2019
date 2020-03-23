@@ -68,7 +68,7 @@ add_library(KrampusObjects OBJECT "${KEngineSRC}")
 
 target_include_directories(KrampusObjects PUBLIC "${INCLUDE_DIRS}")
 
-add_executable(KrampusMasterServer "krampus_master_server.cpp")# ${KrampusObjects})
+add_executable(KrampusMasterServer "krampus_server_client_test.cpp")# ${KrampusObjects})
 add_executable(KrampusServer "krampus_server.cpp")# ${KrampusObjects})
 add_executable(KrampusClient "krampus_client.cpp")# ${KrampusObjects})
 
