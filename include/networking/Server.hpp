@@ -7,7 +7,7 @@
 
 #define CINTERFACE
 #include "Eagle.hpp"
-#include "../eagle/BinStream.hpp"
+#include "Eagle/BinStream.hpp"
 #include "nilorea.h"
 #include <string>
 

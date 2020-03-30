@@ -8,9 +8,9 @@ file(GLOB_RECURSE KEngineSRC "src/*")
 
 set(SHARED TRUE)
 
-set(EAGLE_DIR   "/usr/local/Eagle"      CACHE PATH "Eagle directory")
-set(ALLEGRO_DIR "/usr/local/allegro525" CACHE PATH "Allegro 5 directory")
-set(NILOREA_DIR "/usr/local/nilorea"    CACHE PATH "Nilorea directory")
+set(EAGLE_DIR   "/usr"      CACHE PATH "Eagle directory")
+set(ALLEGRO_DIR "/usr" CACHE PATH "Allegro 5 directory")
+set(NILOREA_DIR "/usr"    CACHE PATH "Nilorea directory")
 
 set(EAGLE_INCLUDE_DIR   "${EAGLE_DIR}/include"   CACHE PATH "Eagle include directory"     FORCE)
 set(ALLEGRO_INCLUDE_DIR "${ALLEGRO_DIR}/include" CACHE PATH "Allegro 5 include directory" FORCE)
@@ -25,22 +25,22 @@ set(NILOREA_LIB_DIR "${NILOREA_DIR}/lib" CACHE PATH "Nilorea lib directory"   FO
 find_library(EAGLE_LIB    EagleShared      ${EAGLE_LIB_DIR})
 find_library(EAGLE_A5_LIB EagleA5Shared    ${EAGLE_LIB_DIR})
 find_library(ALLEGRO_LIB  allegro_monolith ${ALLEGRO_LIB_DIR})
-find_library(NILOREA_LIB  nilorea          ${NILOREA_LIB_DIR})
+find_library(NILOREA_LIB  Nilorea          ${NILOREA_LIB_DIR})
 
 find_library(EAGLE_DEBUG_LIB    EagleDebugShared       ${EAGLE_LIB_DIR})
 find_library(EAGLE_DEBUG_A5_LIB EagleA5DebugShared     ${EAGLE_LIB_DIR})
 find_library(ALLEGRO_DEBUG_LIB  allegro_monolith-debug ${ALLEGRO_LIB_DIR})
-find_library(NILOREA_DEBUG_LIB  nilorea                ${NILOREA_LIB_DIR})
+find_library(NILOREA_DEBUG_LIB  NiloreaDebug                ${NILOREA_LIB_DIR})
 
 find_library(EAGLE_STATIC_LIB    EagleStatic             ${EAGLE_LIB_DIR})
 find_library(EAGLE_STATIC_A5_LIB EagleA5Static           ${EAGLE_LIB_DIR})
 find_library(ALLEGRO_STATIC_LIB  allegro_monolith-static ${ALLEGRO_LIB_DIR})
-find_library(NILOREA_STATIC_LIB  nilorea                 ${NILOREA_LIB_DIR})
+find_library(NILOREA_STATIC_LIB  Nilorea                 ${NILOREA_LIB_DIR})
 
 find_library(EAGLE_DEBUG_STATIC_LIB    EagleDebugStatic       ${EAGLE_LIB_DIR})
 find_library(EAGLE_DEBUG_STATIC_A5_LIB EagleA5DebugStatic     ${EAGLE_LIB_DIR})
 find_library(ALLEGRO_DEBUG_STATIC_LIB  allegro_monolith-debug-static ${ALLEGRO_LIB_DIR})
-find_library(NILOREA_DEBUG_STATIC_LIB  nilorea                ${NILOREA_LIB_DIR})
+find_library(NILOREA_DEBUG_STATIC_LIB  NiloreaDebug                ${NILOREA_LIB_DIR})
 
 set(LIBS_RELEASE "${EAGLE_LIB}" "${EAGLE_A5_LIB}" "${ALLEGRO_LIB}" "${NILOREA_LIB}" CACHE STRING "Link libs" FORCE)
 

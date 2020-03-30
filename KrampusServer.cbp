@@ -123,7 +123,6 @@
 		<Unit filename="../../bin/allegro.log" />
 		<Unit filename="CMakeLists.txt" />
 		<Unit filename="README.txt" />
-		<Unit filename="include/eagle/BinStream.hpp" />
 		<Unit filename="include/eagle/ConsoleWidget.hpp" />
 		<Unit filename="include/eagle/Transitions.hpp" />
 		<Unit filename="include/globals.hpp" />
@@ -143,7 +142,6 @@
 			<Option link="0" />
 		</Unit>
 		<Unit filename="krampus_server_client_test.cpp" />
-		<Unit filename="src/eagle/BinStream.cpp" />
 		<Unit filename="src/eagle/ConsoleWidget.cpp" />
 		<Unit filename="src/eagle/Transitions.cpp" />
 		<Unit filename="src/globals.cpp" />

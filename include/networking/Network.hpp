@@ -7,10 +7,12 @@
 
 #include "Eagle/Events.hpp"
 #include "Eagle/Exception.hpp"
+#include "Eagle/BinStream.hpp"
+
+
 
 #include <string>
 
-#include "../eagle/BinStream.hpp"
 
 
 
