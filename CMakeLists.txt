@@ -25,12 +25,12 @@ set(NILOREA_LIB_DIR "${NILOREA_DIR}/lib" CACHE PATH "Nilorea lib directory"   FO
 find_library(EAGLE_LIB    EagleShared      ${EAGLE_LIB_DIR})
 find_library(EAGLE_A5_LIB EagleA5Shared    ${EAGLE_LIB_DIR})
 find_library(ALLEGRO_LIB  allegro_monolith ${ALLEGRO_LIB_DIR})
-find_library(NILOREA_LIB  Nilorea          ${NILOREA_LIB_DIR})
+find_library(NILOREA_LIB  NiloreaShared          ${NILOREA_LIB_DIR})
 
 find_library(EAGLE_DEBUG_LIB    EagleDebugShared       ${EAGLE_LIB_DIR})
 find_library(EAGLE_DEBUG_A5_LIB EagleA5DebugShared     ${EAGLE_LIB_DIR})
 find_library(ALLEGRO_DEBUG_LIB  allegro_monolith-debug ${ALLEGRO_LIB_DIR})
-find_library(NILOREA_DEBUG_LIB  NiloreaDebug                ${NILOREA_LIB_DIR})
+find_library(NILOREA_DEBUG_LIB  NiloreaDebugShared                ${NILOREA_LIB_DIR})
 
 find_library(EAGLE_STATIC_LIB    EagleStatic             ${EAGLE_LIB_DIR})
 find_library(EAGLE_STATIC_A5_LIB EagleA5Static           ${EAGLE_LIB_DIR})
@@ -68,6 +68,15 @@ add_library(KrampusObjects OBJECT "${KEngineSRC}")
 
 target_include_directories(KrampusObjects PUBLIC "${INCLUDE_DIRS}")
 
+target_compile_definitions(KrampusObjects PRIVATE DEBUG)
+target_compile_definitions(KrampusObjects PRIVATE EAGLE_LOG)
+target_compile_definitions(KrampusObjects PRIVATE EAGLE_ASSERT_EXCEPTION)
+target_compile_options(KrampusObjects PRIVATE "-g")
+
+
+
+
+
 add_executable(KrampusMasterServer "krampus_server_client_test.cpp")# ${KrampusObjects})
 add_executable(KrampusServer "krampus_server.cpp")# ${KrampusObjects})
 add_executable(KrampusClient "krampus_client.cpp")# ${KrampusObjects})
@@ -76,8 +85,9 @@ set(PFX "Krampus")
 
 set(TSFX "")
 
-if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
    string(APPEND TSFX "Debug")
+   
    if (NOT WIN32)
       target_compile_options(KrampusMasterServer PUBLIC "-fsanitize=address")
       target_compile_options(KrampusServer PUBLIC "-fsanitize=address")
