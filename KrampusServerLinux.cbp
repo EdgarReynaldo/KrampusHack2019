@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="KrampusServerLinux" />
+		<Option title="KrampusServer" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -13,13 +13,44 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add option="-DDEBUG" />
 				</Compiler>
 				<Linker>
-					<Add option="-lEagleA5DebugShared" />
-					<Add option="-lEagleDebugShared" />
-					<Add option="-lallegro_monolith-debug" />
+					<Add option="-static" />
+					<Add option="-lEagleA5DebugStatic" />
+					<Add option="-lEagleDebugStatic" />
 					<Add option="-lNilorea" />
+					<Add option="-lallegro_monolith-debug-static" />
+					<Add option="-ljpeg" />
+					<Add option="-ldumb" />
+					<Add option="-lwebp" />
+					<Add option="-lFLAC" />
+					<Add option="-ltheora" />
+					<Add option="-lvorbisfile" />
+					<Add option="-lvorbis" />
+					<Add option="-logg" />
+					<Add option="-lphysfs" />
+					<Add option="-lfreetype" />
+					<Add option="-lpng16" />
+					<Add option="-lzlibstatic" />
+					<Add option="-ldsound" />
+					<Add option="-lgdiplus" />
+					<Add option="-luuid" />
+					<Add option="-lkernel32" />
+					<Add option="-lwinmm" />
+					<Add option="-lpsapi" />
+					<Add option="-lopengl32" />
+					<Add option="-lglu32" />
+					<Add option="-luser32" />
+					<Add option="-lcomdlg32" />
+					<Add option="-lgdi32" />
+					<Add option="-lshell32" />
+					<Add option="-lole32" />
+					<Add option="-ladvapi32" />
+					<Add option="-lws2_32" />
+					<Add option="-lshlwapi" />
+					<Add option="-lpthread" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -31,26 +62,58 @@
 					<Add option="-O2" />
 				</Compiler>
 				<Linker>
-					<Add option="-s" />
-					<Add option="-lEagleA5Shared" />
-					<Add option="-lEagleShared" />
-					<Add option="-lallegro_monolith" />
+					<Add option="-static" />
+					<Add option="-lEagleA5Static" />
+					<Add option="-lEagleStatic" />
 					<Add option="-lNilorea" />
+					<Add option="-lallegro_monolith-static" />
+					<Add option="-ljpeg" />
+					<Add option="-ldumb" />
+					<Add option="-lwebp" />
+					<Add option="-lFLAC" />
+					<Add option="-ltheora" />
+					<Add option="-lvorbisfile" />
+					<Add option="-lvorbis" />
+					<Add option="-logg" />
+					<Add option="-lphysfs" />
+					<Add option="-lfreetype" />
+					<Add option="-lpng16" />
+					<Add option="-lzlibstatic" />
+					<Add option="-ldsound" />
+					<Add option="-lgdiplus" />
+					<Add option="-luuid" />
+					<Add option="-lkernel32" />
+					<Add option="-lwinmm" />
+					<Add option="-lpsapi" />
+					<Add option="-lopengl32" />
+					<Add option="-lglu32" />
+					<Add option="-luser32" />
+					<Add option="-lcomdlg32" />
+					<Add option="-lgdi32" />
+					<Add option="-lshell32" />
+					<Add option="-lole32" />
+					<Add option="-ladvapi32" />
+					<Add option="-lws2_32" />
+					<Add option="-lshlwapi" />
+					<Add option="-lpthread" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-s" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="/usr/local/Eagle/include" />
-			<Add directory="/usr/local/nilorea/include" />
-			<Add directory="/usr/local/allegro525/include" />
+			<Add directory="C:/mingw/i686-w64-mingw32/include" />
+			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/include" />
+			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/include" />
 		</Compiler>
 		<Linker>
-			<Add option="-lpthread" />
-			<Add directory="/usr/local/Eagle/lib" />
-			<Add directory="/usr/local/nilorea/lib" />
-			<Add directory="/usr/local/allegro525/lib" />
+			<Add directory="C:/ctwoplus/progcode/Eagle5GUI_GIT_BitBucket/cbbuild/lib" />
+			<Add directory="E:/LIBS/LIBS81Redistro/Allegro525/lib" />
 		</Linker>
+		<Unit filename="CMakeLists.txt" />
+		<Unit filename="EagleThreadLog.txt" />
 		<Unit filename="NiloreaLog.txt" />
 		<Unit filename="src/eagle/BinStream.cpp" />
 		<Unit filename="src/eagle/BinStream.hpp" />
